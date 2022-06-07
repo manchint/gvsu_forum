@@ -3,8 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-//screens
+//importing screens
 import HomeScreen from './screens/HomeScreen';
+
+
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -23,3 +27,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+const navStyling = {
+  headerStyle: {
+    backgroundColor: "#0065A4",
+  },
+  headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontWeight: "bold",
+  },
+};
