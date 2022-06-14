@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
 //components
 import PostComponent from "../components/PostComponent";
+import NewComponent from "../components/NewComponent";
 
 const HomeScreen = ({ route, navigation }) => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const HomeScreen = ({ route, navigation }) => {
     });
   });
   return <PostComponent />;
+  // return <NewComponent />;
 };
 
 export default HomeScreen;
