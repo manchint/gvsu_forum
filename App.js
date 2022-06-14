@@ -1,22 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Linking } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+
+import { createDrawerNavigator } from "@react-navigation/drawer";
+// import { NavigationContainer } from "@react-navigation/native";
 //importing screens
 import HomeScreen from './screens/HomeScreen';
-
+import NotificationsScreen from './screens/NotificationsScreen'
 
 const Stack = createNativeStackNavigator();
-
+const Drawer = createDrawerNavigator();
 export default function App() {
+  // return (
+  //   <NavigationContainer>
+  //     <Stack.Navigator screenOptions={navStyling}>
+  //       <Stack.Screen name="Home" component={HomeScreen} />
+  //     </Stack.Navigator>
+  //   </NavigationContainer>
+  // );
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={navStyling}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Test" component={() => Linking.openURL('http://google.com')}/>
+        {/* <Drawer.Screen name="BlackBoard"><Text style={{color: 'blue'}}
+                onPress={() => Linking.openURL('http://google.com')}>
+            Google
+            </Text></Drawer.Screen> */}
+      </Drawer.Navigator>
     </NavigationContainer>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

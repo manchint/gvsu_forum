@@ -8,12 +8,12 @@ const HomeScreen = ({ route, navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("DrawNavigation")}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
           <Feather
             style={{ marginRight: 10 }}
             name="menu"
             size={24}
-            color="#fff"
+            color="black"
           />
         </TouchableOpacity>
       ),
