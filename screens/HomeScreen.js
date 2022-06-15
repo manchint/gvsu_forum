@@ -1,11 +1,28 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 //components
 import PostComponent from "../components/PostComponent";
-import NewComponent from "../components/NewComponent";
+import NewPostComponent from "../components/NewPostComponent";
+
+import { initGvsuForumDB } from "../helpers/forum_config";
+import { setupPostsDataListener } from "../helpers/forum_posts";
 
 const HomeScreen = ({ route, navigation }) => {
+  const [postData, setPostsData] = useState([])
+  useEffect(() => {
+    try {
+      initGvsuForumDB();
+    } catch (err) {
+      console.log(err);
+    }
+    setupPostsDataListener((posts) => {
+      setPostsData(posts);
+    });
+  }, [])
+  useEffect(() => {
+    console.log('dfdfd'+postData)
+  }, [postData])
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -20,8 +37,22 @@ const HomeScreen = ({ route, navigation }) => {
       ),
     });
   });
-  return <PostComponent />;
+
+  const renderEachPost = (index, item) => {
+    console.log(item)
+    return (<PostComponent item={item}/>)
+  }
+  return (<View>
+      <NewPostComponent />
+      <FlatList
+            data={postData}
+            renderItem={renderEachPost}
+        />
+    </View>
+  )
+}
   // return <NewComponent />;
-};
+
+  
 
 export default HomeScreen;

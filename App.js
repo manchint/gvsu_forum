@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
-// import { NavigationContainer } from "@react-navigation/native";
 //importing screens
 import HomeScreen from "./screens/HomeScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";

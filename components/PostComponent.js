@@ -1,32 +1,35 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { EvilIcons } from '@expo/vector-icons';
-import { Button } from 'react-native-elements';
+import { Button, Card } from 'react-native-elements';
 
 import { Linking } from 'react-native';
 
-const PostComponent = () => {
+const PostComponent = (props) => {
+    console.log(props.item)
     return (
-        <View style={[styles.margin20, styles.borderBottom]}>
-            <View style={[styles.flexHorizontal]}>
-                <EvilIcons name="user" size={24} color="black"  style={[styles.margin5]}/>
-                <View style={[styles.flexVertical]}>
-                    <Text>sdcds</Text>
-                    <Text>sdcds</Text>
+        <Card>
+            <View style={[styles.margin20, styles.borderBottom]}>
+                <View style={[styles.flexHorizontal]}>
+                    <EvilIcons name="user" size={24} color="black"  style={[styles.margin5]}/>
+                    <View style={[styles.flexVertical]}>
+                        <Text>sdcds</Text>
+                        <Text>sdcds</Text>
+                    </View>
                 </View>
+                <View style={[styles.border]}>
+                    <Text style={[styles.margin5]}>dcvsdvlsvnsdkvnksdnvkjsnvkjsvjksnvksdnkfj</Text>
+                </View>
+                <View style={[styles.flexHorizontal]}>
+                    <Button style={[styles.padding10]}>Like</Button>
+                    <Button style={[styles.padding10]}>Comments</Button>
+                </View>
+                {/* <Text style={{color: 'blue'}}
+                    onPress={() => Linking.openURL('http://google.com')}>
+                Google
+                </Text> */}
             </View>
-            <View style={[styles.border]}>
-                <Text style={[styles.margin5]}>dcvsdvlsvnsdkvnksdnvkjsnvkjsvjksnvksdnkfj</Text>
-            </View>
-            <View style={[styles.flexHorizontal]}>
-                <Button style={[styles.padding10]}>Like</Button>
-                <Button style={[styles.padding10]}>Comments</Button>
-            </View>
-            <Text style={{color: 'blue'}}
-                onPress={() => Linking.openURL('http://google.com')}>
-            Google
-            </Text>
-        </View>
+        </Card>
     )
 }
 
@@ -44,7 +47,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column'
     },
     margin20: {
-        margin: 20
+        marginLeft: 20,
+        marginRight: 20
     },
     margin5: {
         margin: 5
