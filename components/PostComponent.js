@@ -5,20 +5,21 @@ import { Button, Card } from 'react-native-elements';
 
 import { Linking } from 'react-native';
 
+
 const PostComponent = (props) => {
-    console.log(props.item)
+    console.log("vv", props.item)
     return (
         <Card>
             <View style={[styles.margin20, styles.borderBottom]}>
                 <View style={[styles.flexHorizontal]}>
                     <EvilIcons name="user" size={24} color="black"  style={[styles.margin5]}/>
                     <View style={[styles.flexVertical]}>
-                        <Text>sdcds</Text>
+                        <Text>{props.item.user}</Text>
                         <Text>sdcds</Text>
                     </View>
                 </View>
                 <View style={[styles.border]}>
-                    <Text style={[styles.margin5]}>dcvsdvlsvnsdkvnksdnvkjsnvkjsvjksnvksdnkfj</Text>
+                    <Text style={[styles.margin5]}>{props.item.text}</Text>
                 </View>
                 <View style={[styles.flexHorizontal]}>
                     <Button style={[styles.padding10]}>Like</Button>

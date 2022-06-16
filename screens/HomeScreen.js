@@ -38,9 +38,9 @@ const HomeScreen = ({ route, navigation }) => {
     });
   });
 
-  const renderEachPost = (index, item) => {
-    console.log(item)
-    return (<PostComponent item={item}/>)
+  const renderEachPost = (data) => {
+    // console.log(item.item)
+    return (<PostComponent item={data.item}/>)
   }
   return (<View>
       <NewPostComponent />

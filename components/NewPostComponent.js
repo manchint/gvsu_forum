@@ -11,9 +11,12 @@ import { initGvsuForumDB } from "../helpers/forum_config";
 import { addPost } from "../helpers/forum_posts";
 
 import { username  } from "../helpers/user_config";
-
+import ImagePickerComponent from './ImagePickerComponent';
 const NewComponent = () => {
-  const [postText, setPostText] = useState('')
+  const [postData, setPostData] = useState({
+    text: '',
+    image: null,
+  })
   useEffect(() => {
     try {
       initGvsuForumDB();
@@ -22,7 +25,7 @@ const NewComponent = () => {
     }
   }, [])
   const onPostClickListerner = () => {
-    addPost({text:postText, user: username})
+    addPost(postData)
   }
   return (
     <Card>
@@ -38,8 +41,8 @@ const NewComponent = () => {
             placeholder="Had a Query? Post Here..!"
             leftIcon={{ type: "font-awesome", name: "comment" }}
             style={{ borderRadius: 10, borderWidth: 1 }}
-            onChangeText={value => setPostText(value)}
-            value={postText}
+            onChangeText={(val) => setPostData({...postData, text:val})}
+            value={postData.text}
           ></Input>
         </View>
         <View
@@ -48,11 +51,11 @@ const NewComponent = () => {
             justifyContent: "space-between",
           }}
         >
-          {/* <View>
-            <Button title={"Like"}></Button>
-          </View> */}
           <View>
-            <Button title={"Post"} disabled={postText.length <= 0} onPress={onPostClickListerner}></Button>
+            <ImagePickerComponent image={postData.image} onImagePicked={(img) => setPostData({...postData, image:img})}/>
+          </View>
+          <View>
+            <Button title={"Post"} disabled={postData.text.length <= 0} onPress={onPostClickListerner}></Button>
           </View>
         </View>
       </View>
