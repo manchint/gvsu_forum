@@ -8,6 +8,7 @@ import NewPostComponent from "../components/NewPostComponent";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupPostsDataListener } from "../helpers/forum_posts";
 
+import { data } from "../helpers/user_config";
 const HomeScreen = ({ route, navigation }) => {
   const [postData, setPostsData] = useState([])
   useEffect(() => {
@@ -43,7 +44,7 @@ const HomeScreen = ({ route, navigation }) => {
     return (<PostComponent item={data.item}/>)
   }
   return (<View>
-      <NewPostComponent />
+      {data.email ? <NewPostComponent /> : <></> }
       <FlatList
             data={postData}
             renderItem={renderEachPost}

@@ -20,7 +20,8 @@ const NewComponent = () => {
     image: null,
     user: data.firstname,
     likes: 0,
-    comments: 0
+    comments: 0,
+    date: ''
   })
   useEffect(() => {
     try {
@@ -29,8 +30,20 @@ const NewComponent = () => {
       console.log("An Error occurred while initializing DB"+err);
     }
   }, [])
+
+  //gets current timestamp in required format
+  function getTimestamp() {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const today = new Date();
+    const date = days[today.getDay()] + ' '+
+        months[today.getMonth()] + ' ' +
+        today.getDate() + ' ' + today.getFullYear()
+    
+    return date;
+  }
   const onPostClickListerner = () => {
-    addPost(postData)
+    addPost({...postData, date:getTimestamp()})
   }
   return (
     <Card>
