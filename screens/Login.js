@@ -17,6 +17,12 @@ const image = {
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupUsersDataListener } from "../helpers/forum_users";
 import { data } from "../helpers/user_config";
+
+const CryptoJS = require('crypto-js');
+
+const decrypt = (data) => {
+  return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
+};
 const Login = ({route, navigation}) => {
   const [loginData, setLoginData] = useState({
     email: '',
@@ -52,7 +58,7 @@ const Login = ({route, navigation}) => {
     if(isValidData) {
       let data = usersData.filter(user => user.email === loginData.email)
       if (data.length > 0) {
-        if(data[0].password === loginData.password) {
+        if(decrypt(data[0].password) === loginData.password) {
           data = data[0]
           navigation.navigate("Home")
         }

@@ -12,6 +12,8 @@ import { addPost } from "../helpers/forum_posts";
 
 import { data  } from "../helpers/user_config";
 import ImagePickerComponent from './ImagePickerComponent';
+
+
 const NewComponent = () => {
   const [postData, setPostData] = useState({
     text: '',

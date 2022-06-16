@@ -18,6 +18,12 @@ const image = {
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { addUser } from "../helpers/forum_users";
 
+const CryptoJS = require('crypto-js');
+
+const encrypt = (text) => {
+  return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
+};
+
 const Signup = ({route, navigation}) => {
   const [userData, setUserData] = useState({
     email:'',
@@ -94,7 +100,8 @@ const Signup = ({route, navigation}) => {
     }
 
     if(isValidData) {
-      addUser(userData);
+      delete userData.confirmPassword;
+      addUser({...userData, password:encrypt(userData.password)});
       navigation.navigate("Login")
     }
     
