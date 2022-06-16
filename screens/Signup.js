@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -8,13 +8,98 @@ import {
 } from "react-native";
 import { Button, Input, Image } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
+import { email } from "../helpers/user_config";
 
 const image = {
   uri: "https://www.gvsu.edu/cms4/asset/C7753713-BC76-10D4-782FD4F10538B49B/campus_involvement[1550090245].jpg",
 };
-const img = { img01d: require("../assets/Loginlogo.svg") };
+//const img = { img01d: require("../assets/Loginlogo.svg") };
 
-const Signup = () => (
+import { initGvsuForumDB } from "../helpers/forum_config";
+import { addUser } from "../helpers/forum_users";
+
+const Signup = ({route, navigation}) => {
+  const [userData, setUserData] = useState({
+    email:'',
+    firstname:'',
+    lastname:'',
+    password:'',
+    confirmPassword:''
+  });
+
+  const [errState, setErrState] = useState({
+    email:'',
+    firstname:'',
+    lastname:'',
+    password:'',
+    confirmPassword:''
+  })
+
+  useEffect(() => {
+    try {
+      initGvsuForumDB();
+    } catch (err) {
+      console.log("An Error occurred while initializing DB"+err);
+    }
+  }, [])
+
+  const validateUserData = () => {
+    
+    let isValidData = true
+    setErrState({
+      ...errState,
+      email:'',
+      firstname:'',
+      lastname:'',
+      password:'',
+      confirmPassword:''
+    })
+    //Verifying Email
+    if (userData.email === '') {
+      isValidData = false
+      console.log("sdvdavcx", userData)
+      setErrState({...errState, email:'Please Enter your email'})
+    }
+    else if (!userData.email.endsWith('gvsu.edu')) {
+      isValidData = false
+      setErrState({...errState, email:'Please provide your GVSU email'})
+    }
+
+    //Verifying First Name
+    if(userData.firstname === '') {
+      isValidData = false
+      setErrState({...errState, firstname:'Please enter your first name'})
+    }
+
+    //Verifying Last Name
+    if(userData.lastname === '') {
+      isValidData = false
+      setErrState({...errState, lastname:'Please enter your last name'})
+    }
+
+    //Verifying First Name
+    if(userData.password === '') {
+      isValidData = false
+      setErrState({...errState, password:'Please provide password'})
+    }
+
+    //Verifying First Name
+    if(userData.confirmPassword === '') {
+      isValidData = false
+      setErrState({...errState, confirmPassword:'Please provide password'})
+    }
+    else if(userData.confirmPassword !== userData.password) {
+      isValidData = false
+      setErrState({...errState, confirmPassword:'Password doesnot match'})
+    }
+
+    if(isValidData) {
+      addUser(userData);
+      navigation.navigate("Login")
+    }
+    
+  } 
+  return(
   <View style={styles.container}>
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -32,31 +117,69 @@ const Signup = () => (
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Please Enter Your Email"
+            placeholder="Email"
             placeholderTextColor="#003f5c"
+            value={userData.email}
+            errorStyle={styles.inputError}
+            errorMessage={errState.email}
+            onChangeText={(val) => setUserData({...userData, email:val})}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Please Enter Your Password"
+            placeholder="First Name"
             placeholderTextColor="#003f5c"
+            value={userData.firstname}
+            errorStyle={styles.inputError}
+            errorMessage={errState.firstname}
+            onChangeText={(val) => setUserData({...userData, firstname:val})}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Last Name"
+            placeholderTextColor="#003f5c"
+            value={userData.lastname}
+            errorStyle={styles.inputError}
+            errorMessage={errState.lastname}
+            onChangeText={(val) => setUserData({...userData, lastname:val})}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            secureTextEntry={true} //for not displaying the password
+            placeholder="Password"
+            placeholderTextColor="#003f5c"
+            value={userData.password}
+            errorStyle={styles.inputError}
+            errorMessage={errState.password}
+            onChangeText={(val) => setUserData({...userData, password:val})}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
             placeholder="Confirm Your Password"
+            secureTextEntry={true} //for not displaying the password
             placeholderTextColor="#003f5c"
+            value={userData.confirmPassword}
+            errorStyle={styles.inputError}
+            errorMessage={errState.confirmPassword}
+            onChangeText={(val) => setUserData({...userData, confirmPassword:val})}
           />
         </View>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>SIGNUP</Text>
-        </TouchableOpacity>
+        <Button style={styles.loginText} onPress={() => validateUserData()}>SIGNUP</Button>
+        {/* <TouchableOpacity style={styles.loginBtn}>
+          <Button style={styles.loginText} onPress={() => validateUserData()}>SIGNUP</Button>
+        </TouchableOpacity> */}
       </View>
     </ImageBackground>
   </View>
-);
+  )
+        };
 
 const styles = StyleSheet.create({
   container: {
@@ -99,6 +222,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     backgroundColor: "blue",
+  },
+  inputError: {
+    color: "red",
   },
 });
 

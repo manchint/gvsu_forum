@@ -6,21 +6,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 //importing screens
 import HomeScreen from "./screens/HomeScreen";
-import NotificationsScreen from "./screens/NotificationsScreen";
+import Signup from "./screens/Signup";
+import Login from './screens/Login';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 export default function App() {
-  // return (
-  //   <NavigationContainer>
-  //     <Stack.Navigator screenOptions={navStyling}>
-  //       <Stack.Screen name="Home" component={HomeScreen} />
-  //     </Stack.Navigator>
-  //   </NavigationContainer>
-  // );
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Login">
+      <Drawer.Screen name="Sign up" component={Signup} />
+        <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="GVSU Home"

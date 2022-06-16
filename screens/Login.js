@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -12,33 +12,92 @@ import { TextInput } from "react-native-gesture-handler";
 const image = {
   uri: "https://app.streamlineathletes.com/assets/programs/108/grand-valley-state-university_hero.jpg",
 };
-const img = { img01d: require("../assets/Loginlogo.svg") };
+//const img = { img01d: require("../assets/Loginlogo.svg") };
 
-const Login = () => (
-  <View style={styles.container}>
-    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Enter Email"
-            placeholderTextColor="#003f5c"
-          />
+import { initGvsuForumDB } from "../helpers/forum_config";
+import { setupUsersDataListener } from "../helpers/forum_users";
+import { data } from "../helpers/user_config";
+const Login = ({route, navigation}) => {
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  });
+  const [errLogin, setErrLogin] = useState({
+    email: '',
+    password: ''
+  })
+  const [usersData, setUsersData] = useState([])
+  useEffect(() => {
+    try {
+      initGvsuForumDB();
+    } catch (err) {
+      console.log(err);
+    }
+    setupUsersDataListener((users) => {
+      setUsersData(users);
+    });
+  }, [])
+
+  const validateAndLogin = () => {
+    let isValidData = true
+    if (loginData.email === '') {
+      isValidData = false;
+      setErrLogin({...errLogin, email:'Please enter your email'});
+    }
+    if (loginData.password === '') {
+      isValidData = false;
+      setErrLogin({...errLogin, password: 'Please enter your password'})
+    }
+
+    if(isValidData) {
+      let data = usersData.filter(user => user.email === loginData.email)
+      if (data.length > 0) {
+        if(data[0].password === loginData.password) {
+          data = data[0]
+          navigation.navigate("Home")
+        }
+        else setErrLogin({...errLogin, password: 'Wrong password'})
+      } else {
+        //display error message no user found
+      }
+    }
+  }
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Enter Email"
+              placeholderTextColor="#003f5c"
+              value={loginData.email}
+              errorStyle={styles.inputError}
+              errorMessage={errLogin.password}
+              onChangeText={(val) => setLoginData({...loginData, email:val})}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Enter Password"
+              placeholderTextColor="#003f5c"
+              value={loginData.password}
+              secureTextEntry={true} //for not displaying the password
+              errorStyle={styles.inputError}
+              errorMessage={errLogin.password}
+              onChangeText={(val) => setLoginData({...loginData, password:val})}
+            />
+          </View>
+          <Button style={styles.loginText} onPress={validateAndLogin}>LOGIN</Button>
+          {/* <TouchableOpacity style={styles.loginBtn}>
+            
+          </TouchableOpacity> */}
         </View>
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Enter Password"
-            placeholderTextColor="#003f5c"
-          />
-        </View>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
-  </View>
-);
+      </ImageBackground>
+    </View>
+  )
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +140,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     backgroundColor: "blue",
+  },
+  inputError: {
+    color: "red",
   },
 });
 

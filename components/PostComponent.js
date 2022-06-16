@@ -25,10 +25,6 @@ const PostComponent = (props) => {
                     <Button style={[styles.padding10]}>Like</Button>
                     <Button style={[styles.padding10]}>Comments</Button>
                 </View>
-                {/* <Text style={{color: 'blue'}}
-                    onPress={() => Linking.openURL('http://google.com')}>
-                Google
-                </Text> */}
             </View>
         </Card>
     )

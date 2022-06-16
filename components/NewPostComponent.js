@@ -10,12 +10,15 @@ import { TextInput } from "react-native-gesture-handler";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { addPost } from "../helpers/forum_posts";
 
-import { username  } from "../helpers/user_config";
+import { data  } from "../helpers/user_config";
 import ImagePickerComponent from './ImagePickerComponent';
 const NewComponent = () => {
   const [postData, setPostData] = useState({
     text: '',
     image: null,
+    user: data.firstname,
+    likes: 0,
+    comments: 0
   })
   useEffect(() => {
     try {
