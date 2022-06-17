@@ -7,7 +7,7 @@ const storage = new Storage({
 
   // Use AsyncStorage for RN apps, or window.localStorage for web apps.
   // If storageBackend is not set, data will be lost after reload.
-  storageBackend: AsyncStorage, 
+  storageBackend: AsyncStorage,
 
   // expire time, default: 1 day (1000 * 3600 * 24 milliseconds).
   // can be null, which means never expire.
@@ -66,7 +66,6 @@ export const saveData = (response) => {
   });
 };
 
-
 export const removeData = () => {
-  removeItem({key: "loginState"})
-}
+  storage.removeItem({ key: "loginState" });
+};

@@ -73,6 +73,14 @@ const NewComponent = () => {
       date: getTimestamp(),
       user: loginData?.email ? loginData?.email : "test",
     });
+    setPostData({
+      text: "",
+      image: null,
+      user: "",
+      likes: 0,
+      comments: 0,
+      date: "",
+    });
   };
   return (
     <Card>
@@ -122,7 +130,16 @@ const NewComponent = () => {
             <Button
               title={"Cancel"}
               disabled={postData.text.length <= 0}
-              onPress={onPostClickListerner}
+              onPress={() =>
+                setPostData({
+                  text: "",
+                  image: null,
+                  user: "",
+                  likes: 0,
+                  comments: 0,
+                  date: "",
+                })
+              }
             ></Button>
           </View>
         </View>

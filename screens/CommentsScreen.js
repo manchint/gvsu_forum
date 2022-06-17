@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View, FlatList } from "react-native";
 import { Button, Input, Card } from "react-native-elements";
 import { EvilIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 //helper functions
 import { updatePost } from "../helpers/forum_posts";
@@ -16,7 +17,8 @@ const CommentsScreen = ({ route }) => {
     return (
       <Card key={`${route.params.data.id} ${data.index}`}>
         <View style={{ flexDirection: "row" }}>
-          <EvilIcons name="user" size={24} color="black" style={{}} />
+          <FontAwesome name="user-circle-o" size={24} color="black" />
+
           <Text style={{ marginLeft: 10 }}>{data.item.name}</Text>
         </View>
 

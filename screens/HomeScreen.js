@@ -68,7 +68,7 @@ const HomeScreen = ({ route, navigation }) => {
                 Linking.openURL("https://www.gvsu.edu/facultystaff.htm");
               else if (selectedItem === "LOGOUT") {
                 removeData();
-                navigation.navigate("login");
+                navigation.navigate("Login");
               }
             }}
             buttonTextAfterSelection={() => {
