@@ -13,22 +13,22 @@ import { initGvsuForumDB } from "./forum_config";
 export function addPost(item) {
   console.log("Hello", item);
 
-  const app = initGvsuForumDB();
-  const storage = getStorage(app);
+  // const app = initGvsuForumDB();
+  // const storage = getStorage(app);
 
-  const storageRef = ref(storage, item.image);
+  // const storageRef = ref(storage, item.image);
   // var storage = firebase.storage().ref(item.image);
 
   //get file url
-  storageRef
-    .getDownloadURL()
-    .then(function (url) {
-      console.log(url);
-    })
-    .catch(function (error) {
-      console.log("error encountered");
-    });
-  console.log(item.image);
+  // storageRef
+  //   .getDownloadURL()
+  //   .then(function (url) {
+  //     console.log(url);
+  //   })
+  //   .catch(function (error) {
+  //     console.log("error encountered");
+  //   });
+  // console.log(item.image);
   //   const storage = getStorage(app);
 
   //   const storageRef = ref(storage, item.image);
@@ -58,10 +58,10 @@ export function addPost(item) {
   // storageref.put(file).then(() => {
   //   firebase.storage().ref("posts").child(user.uid).getDownloadURL()
   //     .then((downloadURL) => {
-  //       const db = getDatabase();
-  //       item.image = downloadURL;
-  //       const reference = ref(db,'posts/');
-  //       push(reference, item);
+  const db = getDatabase();
+  // item.image = downloadURL;
+  const reference = ref(db, "posts/");
+  push(reference, item);
   //     })})
 
   //uploading iimage
