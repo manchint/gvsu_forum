@@ -72,18 +72,20 @@ const Login = ({ route, navigation }) => {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               placeholder="Enter Email"
               placeholderTextColor="#003f5c"
               value={loginData.email}
               errorStyle={styles.inputError}
               errorMessage={errLogin.password}
+              // errorMessage={"Hi"}
+
               onChangeText={(val) => setLoginData({ ...loginData, email: val })}
             />
           </View>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               placeholder="Enter Password"
               placeholderTextColor="#003f5c"
@@ -97,7 +99,7 @@ const Login = ({ route, navigation }) => {
             />
           </View>
           <Button
-            style={{}}
+            style={{ marginTop: 30 }}
             title={"LOGIN"}
             onPress={validateAndLogin}
           ></Button>
@@ -132,9 +134,9 @@ const styles = StyleSheet.create({
   inputView: {
     backgroundColor: "white",
     borderRadius: 30,
-    width: "40%",
+    width: "70%",
     height: 45,
-    marginBottom: 10,
+    marginBottom: 30,
     borderColor: "black",
     borderWidth: 1,
     // alignItems: "center",
@@ -151,6 +153,8 @@ const styles = StyleSheet.create({
   },
   inputError: {
     color: "red",
+    fontWeight: "bold",
+    // fontSize: "25",
   },
 });
 
