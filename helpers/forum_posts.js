@@ -7,10 +7,10 @@ import {
   set,
   getInputVal,
 } from "firebase/database";
-import storage from '@react-native-firebase/storage';
+import storage from 'firebase/storage';
 export function addPost(item) {
-  const filename = uri.substring(item.image.lastIndexOf('/') + 1);
-  const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+  const filename = item.image.substring(item.image.lastIndexOf('/') + 1);
+  const uploadUri = Platform.OS === 'ios' ? item.image.replace('file://', '') : item.image;
   const task = storage()
     .ref(filename)
     .putFile(uploadUri);
