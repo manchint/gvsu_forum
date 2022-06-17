@@ -8,47 +8,61 @@ import {
   getInputVal,
 } from "firebase/database";
 
-//import { firebase } from "firebase/app";
 import { getStorage, uploadBytesResumable } from "firebase/storage";
 import { initGvsuForumDB } from "./forum_config";
-
-//import "react-native-get-random-values";
-import { v4 as uuidv4 } from "uuid";
-
 export function addPost(item) {
-  // console.log("Hello");
-  // const db = getDatabase();
-  // //item.image = downloadURL;
-  // const reference = ref(db, "posts/");
-  // push(reference, item);
-  // console.log("ss", item);
+  console.log("Hello", item);
 
-  // const app = initGvsuForumDB();
-  // const storage = getStorage(app);
+  const app = initGvsuForumDB();
+  const storage = getStorage(app);
 
-  // const storageRef = ref(storage, item.image);
-  const db = getDatabase();
-  // item.image = downloadURL;
-  const reference = ref(db, "posts/");
-  push(reference, item);
+  const storageRef = ref(storage, item.image);
   // var storage = firebase.storage().ref(item.image);
 
   //get file url
-  //var storage = firebase.storage();
-  //var storageref = storage.ref();
+  storageRef
+    .getDownloadURL()
+    .then(function (url) {
+      console.log(url);
+    })
+    .catch(function (error) {
+      console.log("error encountered");
+    });
+  console.log(item.image);
+  //   const storage = getStorage(app);
+
+  //   const storageRef = ref(storage, item.image);
+  //   const uploadTask = uploadBytesResumable(storageRef, file);
+
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //         // const percent = Math.round(
+  //         //     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //         // );
+
+  //         // // update progress
+  //         // setPercent(percent);
+  //     },
+  //     (err) => console.log(err),
+  //     () => {
+  //         // download url
+  //         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+  //             console.log(url);
+  //         });
+  //     }
+  // );
+
+  // var storage = firebase.storage();
+  // var storageref=storage.ref();
   // storageref.put(file).then(() => {
-  //   firebase
-  //     .storage()
-  //     .ref("images")
-  //     .child(user.uid)
-  //     .getDownloadURL()
+  //   firebase.storage().ref("posts").child(user.uid).getDownloadURL()
   //     .then((downloadURL) => {
   //       const db = getDatabase();
   //       item.image = downloadURL;
-  //       const reference = ref(db, "posts/");
+  //       const reference = ref(db,'posts/');
   //       push(reference, item);
-  //     });
-  // });
+  //     })})
 
   //uploading iimage
   // var type = getInputVal('types');
