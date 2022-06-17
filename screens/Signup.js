@@ -118,7 +118,7 @@ const Signup = ({ route, navigation }) => {
             Welcome to GVSU
           </Text>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               placeholder="Email"
               placeholderTextColor="#003f5c"
@@ -129,7 +129,7 @@ const Signup = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               placeholder="First Name"
               placeholderTextColor="#003f5c"
@@ -142,7 +142,7 @@ const Signup = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               placeholder="Last Name"
               placeholderTextColor="#003f5c"
@@ -155,7 +155,7 @@ const Signup = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               secureTextEntry={true} //for not displaying the password
               placeholder="Password"
@@ -169,7 +169,7 @@ const Signup = ({ route, navigation }) => {
             />
           </View>
           <View style={styles.inputView}>
-            <TextInput
+            <Input
               style={styles.TextInput}
               placeholder="Confirm Your Password"
               secureTextEntry={true} //for not displaying the password
@@ -183,7 +183,7 @@ const Signup = ({ route, navigation }) => {
             />
           </View>
           <Button
-            style={styles.loginText}
+            style={{ marginTop: 100 }}
             onPress={() => validateUserData()}
             title={"SIGNUP"}
           ></Button>
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: "70%",
     height: 45,
-    marginBottom: 10,
+    marginBottom: 30,
     borderColor: "black",
     borderWidth: 1,
     // alignItems: "center",
