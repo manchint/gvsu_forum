@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   AsyncStorage,
 } from "react-native";
-import { storage, saveData } from "../helpers/storage_init";
+import { storage, saveData, getData } from "../helpers/storage_init";
 import { Button, Input, Image } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
+// import { getData } from "../helpers/storage_init";
 
 const image = {
   uri: "https://app.streamlineathletes.com/assets/programs/108/grand-valley-state-university_hero.jpg",
@@ -35,6 +36,7 @@ const Login = ({ route, navigation }) => {
   });
   const [usersData, setUsersData] = useState([]);
   useEffect(() => {
+    getData(setLoginData);
     try {
       initGvsuForumDB();
     } catch (err) {
@@ -44,7 +46,11 @@ const Login = ({ route, navigation }) => {
       setUsersData(users);
     });
   }, []);
-
+  useEffect(() => {
+    if (loginData.email) {
+      navigation.navigate("Home");
+    }
+  }, [loginData]);
   const validateAndLogin = () => {
     let isValidData = true;
     if (loginData.email === "") {

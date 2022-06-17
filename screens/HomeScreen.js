@@ -53,6 +53,7 @@ const HomeScreen = ({ route, navigation }) => {
   }, [postData]);
   useEffect(() => {
     navigation.setOptions({
+      headerLeft: () => <></>,
       headerRight: () => (
         <View
           style={{
