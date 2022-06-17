@@ -15,11 +15,15 @@ const CommentsScreen = ({route, navigation}) => {
         console.log("data", data)
         return (
             <View>
-                <Input
+                <View>
+                <Text item={data.item} />
+                </View>
+                <View>
+                    <Input
                     value={comment}
                     onChangeText={(val) => setComment(val)}></Input>
-                <Button>comment</Button>
-                {/* <Text item={data.item} /> */}
+                    <Button>comment</Button>
+                </View>
             </View>
         )
       };
