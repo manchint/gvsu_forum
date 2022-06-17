@@ -187,4 +187,14 @@ export function updatePost(item) {
 //   }
 // }
 
-export function stopPostsDataListener() {}
+
+
+export function stopPostsDataListener() {
+  const db = getDatabase();
+  let unsubscribe = ref(db, "posts/")
+    
+    .onSnapshot((snapshot) => console.log("stopPostsDataListener fires up with: ", snapshot))
+  unsubscribe();
+  // const reference = ref(db, "posts/");
+  // push(reference, item);
+}

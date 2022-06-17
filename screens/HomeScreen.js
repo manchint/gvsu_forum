@@ -16,21 +16,14 @@ import NewPostComponent from "../components/NewPostComponent";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupPostsDataListener } from "../helpers/forum_posts";
 
-//import ModalDropdown from 'react-native-modal-dropdown';
 
 import SelectDropdown from "react-native-select-dropdown";
 
 import { data } from "../helpers/user_config";
-import { Button } from "react-native-elements";
+import { removeData } from "../helpers/storage_init";
 
-const countries = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF"];
+const countries = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF", "LOGOUT"];
 const HomeScreen = ({ route, navigation }) => {
-  // <<<<<<< Updated upstream
-  //const {name} = route.params
-  //console.log("xvxc",route.params?.name)
-  // =======
-  console.log("sdfgd", route.params);
-  // >>>>>>> Stashed changes
   const [postData, setPostsData] = useState([]);
   useEffect(() => {
     try {
@@ -41,16 +34,7 @@ const HomeScreen = ({ route, navigation }) => {
     setupPostsDataListener((posts) => {
       setPostsData(posts);
     });
-    // <<<<<<< Updated upstream
-    if (route.params?.name === "gvsu home")
-      window.location.href("https://www.gvsu.edu");
-    // =======
-    // console.log("sdfgd", Object.keys(route.params));
-    // >>>>>>> Stashed changes
   }, []);
-  useEffect(() => {
-    console.log("dfdfd" + postData);
-  }, [postData]);
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <></>,
@@ -88,6 +72,10 @@ const HomeScreen = ({ route, navigation }) => {
                 Linking.openURL("https://www.gvsu.edu/banner/");
               else if (selectedItem === "FACULTY STAFF")
                 Linking.openURL("https://www.gvsu.edu/facultystaff.htm");
+              else if (selectedItem === 'LOGOUT') {
+                removeData()
+                navigation.navigate('login')
+              } 
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected

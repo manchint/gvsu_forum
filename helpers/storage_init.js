@@ -84,3 +84,8 @@ export const saveData = (response) => {
     expires: 1000 * 3600,
   });
 };
+
+
+export const removeData = () => {
+  removeItem({key: "loginState"})
+}
