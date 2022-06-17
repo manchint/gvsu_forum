@@ -4,7 +4,7 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  Linking
+  Linking,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Feather } from "@expo/vector-icons";
@@ -18,15 +18,19 @@ import { setupPostsDataListener } from "../helpers/forum_posts";
 
 //import ModalDropdown from 'react-native-modal-dropdown';
 
-import SelectDropdown from 'react-native-select-dropdown'
+import SelectDropdown from "react-native-select-dropdown";
 
 import { data } from "../helpers/user_config";
 import { Button } from "react-native-elements";
 
-const countries = ["gvsu home", "Canada", "Australia", "Ireland"]
+const countries = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF"];
 const HomeScreen = ({ route, navigation }) => {
+  // <<<<<<< Updated upstream
   //const {name} = route.params
   //console.log("xvxc",route.params?.name)
+  // =======
+  console.log("sdfgd", route.params);
+  // >>>>>>> Stashed changes
   const [postData, setPostsData] = useState([]);
   useEffect(() => {
     try {
@@ -37,7 +41,12 @@ const HomeScreen = ({ route, navigation }) => {
     setupPostsDataListener((posts) => {
       setPostsData(posts);
     });
-    //if(route.params?.name === 'gvsu home')  window.location.href("https://www.gvsu.edu")
+    // <<<<<<< Updated upstream
+    if (route.params?.name === "gvsu home")
+      window.location.href("https://www.gvsu.edu");
+    // =======
+    // console.log("sdfgd", Object.keys(route.params));
+    // >>>>>>> Stashed changes
   }, []);
   useEffect(() => {
     console.log("dfdfd" + postData);
@@ -55,26 +64,56 @@ const HomeScreen = ({ route, navigation }) => {
         </TouchableOpacity>
       ),
       headerRight: () => (
-        <SelectDropdown
-          data={countries}
-          defaultButtonText = "asfds"
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
-            if(selectedItem === 'gvsu home') Linking.openURL("https://lms.gvsu.edu/ultra/institution-page") 
+        <View
+          style={{
+            marginRight: 25,
+            width: 100,
+            alignContent: "center",
+            // alignItems: "center",
+            // flexDirection: "row",
           }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return <EvilIcons name="user" size={24} color="black"/>
-          }}
-          rowTextForSelection={(item, index) => {
-            // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
-            return item
-          }}
-        />
+        >
+          <SelectDropdown
+            data={countries}
+            defaultButtonText={
+              <EvilIcons
+                name="user"
+                size={40}
+                color="blue"
+                // marginRight={500}
+                alignContent={"center"}
+              />
+            }
+            // rowTextStyle={SelectDropdown}
+            // marginRight={50}
+            dropdownIconPosition={"left"}
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+              if (selectedItem === "GVSU HOME")
+                Linking.openURL("https://www.gvsu.edu/");
+              else if (selectedItem === "BLACK BOARD")
+                Linking.openURL("https://lms.gvsu.edu/ultra/institution-page");
+              else if (selectedItem === "BANNER")
+                Linking.openURL("https://www.gvsu.edu/banner/");
+              else if (selectedItem === "FACULTY STAFF")
+                Linking.openURL("https://www.gvsu.edu/facultystaff.htm");
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return <EvilIcons name="user" size={24} color="black" />;
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
+            }}
+          />
+          {/* <Button title={"HELP"}></Button> */}
+        </View>
+
         // <ModalDropdown options={['option 1', 'option 2']}/>
-         //<EvilIcons name="user" size={24} color="black"  style={[styles.margin5]}/>
+        //<EvilIcons name="user" size={24} color="black"  style={[styles.margin5]}/>
         // <Button title={"LOGOUT"} style={{ marginRight: 10 }} onPress={() => navigation.navigate("Login")}></Button>
       ),
     });
@@ -85,7 +124,13 @@ const HomeScreen = ({ route, navigation }) => {
   };
   return (
     <View>
-      <Button onPress={() => Linking.openURL("https://lms.gvsu.edu/ultra/institution-page")}>sdfdsfc</Button>
+      {/* <Button
+        onPress={() =>
+          Linking.openURL("https://lms.gvsu.edu/ultra/institution-page")
+        }
+      >
+        sdfdsfc
+      </Button> */}
       {data.email ? (
         <NewPostComponent />
       ) : (
