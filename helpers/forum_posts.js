@@ -112,13 +112,6 @@ export function addPost(item) {
   } 
 
 
-  function uploadimage(image){
-    var type = getInputVal('types');
- var storage = firebase.storage();
- var file=document.getElementById("files ").files[0];
- var storageref=storage.ref();
- 
-}
 export function stopPostsDataListener() {
 
 }

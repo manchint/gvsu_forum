@@ -15,13 +15,14 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Navigator initialRouteName="Login">
         <Drawer.Screen name="Sign up" component={Signup} />
         <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Home" component={HomeScreen}  initialParams={{name:'dhgfdjsgf'}}/>
         <Drawer.Screen
           name="GVSU Home"
           component={() => Linking.openURL("https://www.gvsu.edu/")}
+          initialParams={{name:'dhgfdjsgf'}}
         />
         <Drawer.Screen
           name="Black Board"

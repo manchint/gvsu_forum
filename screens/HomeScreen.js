@@ -19,6 +19,8 @@ import { setupPostsDataListener } from "../helpers/forum_posts";
 import { data } from "../helpers/user_config";
 import { Button } from "react-native-elements";
 const HomeScreen = ({ route, navigation }) => {
+  const {name} = route.params
+  //console.log("xvxc",route.params?.name)
   const [postData, setPostsData] = useState([]);
   useEffect(() => {
     try {
