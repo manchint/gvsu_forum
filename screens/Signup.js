@@ -4,16 +4,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
 } from "react-native";
-import { Button, Input, Image } from "react-native-elements";
-import { TextInput } from "react-native-gesture-handler";
-import { email } from "../helpers/user_config";
+import { Button, Input } from "react-native-elements";
 
 const image = {
   uri: "https://www.gvsu.edu/cms4/asset/C7753713-BC76-10D4-782FD4F10538B49B/campus_involvement[1550090245].jpg",
 };
-//const img = { img01d: require("../assets/Loginlogo.svg") };
 
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { addUser } from "../helpers/forum_users";

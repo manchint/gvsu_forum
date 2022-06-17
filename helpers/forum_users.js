@@ -1,5 +1,5 @@
 
-import { getDatabase, onValue, push, ref, remove, set } from "firebase/database";
+import { getDatabase, onValue, push, ref } from "firebase/database";
 
 export function addUser(item) {
     console.log(item)

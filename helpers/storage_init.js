@@ -7,7 +7,7 @@ const storage = new Storage({
 
   // Use AsyncStorage for RN apps, or window.localStorage for web apps.
   // If storageBackend is not set, data will be lost after reload.
-  storageBackend: AsyncStorage, // for web: window.localStorage
+  storageBackend: AsyncStorage, 
 
   // expire time, default: 1 day (1000 * 3600 * 24 milliseconds).
   // can be null, which means never expire.
@@ -28,7 +28,6 @@ export const getData = (fn) => {
   storage
     .load({
       key: "loginState",
-
       // autoSync (default: true) means if data is not found or has expired,
       // then invoke the corresponding sync method
       autoSync: true,
@@ -43,9 +42,7 @@ export const getData = (fn) => {
       // you can pass extra params to the sync method
       // see sync example below
       syncParams: {
-        extraFetchOptions: {
-          // blahblah
-        },
+        extraFetchOptions: {},
         someFlag: true,
       },
     })
@@ -58,29 +55,13 @@ export const getData = (fn) => {
       // any exception including data not found
       // goes to catch()
       console.warn(err.message);
-      switch (err.name) {
-        case "NotFoundError":
-          // TODO;
-          break;
-        case "ExpiredError":
-          // TODO
-          break;
-      }
     });
 };
 
 export const saveData = (response) => {
   storage.save({
     key: "loginState", // Note: Do not use underscore("_") in key!
-    // data: {
-    //   from: "some other site",
-    //   userid: "some userid",
-    //   token: "some token",
-    // },
     data: response,
-
-    // if expires not specified, the defaultExpires will be applied instead.
-    // if set to null, then it will never expire.
     expires: 1000 * 3600,
   });
 };

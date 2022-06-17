@@ -2,20 +2,17 @@ import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
-  AsyncStorage,
 } from "react-native";
-import { storage, saveData, getData } from "../helpers/storage_init";
-import { Button, Input, Image } from "react-native-elements";
-import { TextInput } from "react-native-gesture-handler";
-// import { getData } from "../helpers/storage_init";
+import { Button, Input } from "react-native-elements";
+
+//helper function
+import { saveData, getData } from "../helpers/storage_init";
+
 
 const image = {
   uri: "https://app.streamlineathletes.com/assets/programs/108/grand-valley-state-university_hero.jpg",
 };
-//const img = { img01d: require("../assets/Loginlogo.svg") };
 
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupUsersDataListener } from "../helpers/forum_users";
@@ -66,12 +63,6 @@ const Login = ({ route, navigation }) => {
       let response = usersData.filter((user) => user.email === loginData.email);
       if (response.length > 0) {
         if (decrypt(response[0].password) === loginData.password) {
-          //data = response[0];
-          // try {
-          //   AsyncStorage.setItem((data = response[0]));
-          // } catch (error) {
-          //   // Error saving data
-          // }
           saveData(response[0]);
           navigation.navigate("Home");
         } else setErrLogin({ ...errLogin, password: "Wrong password" });
@@ -93,8 +84,6 @@ const Login = ({ route, navigation }) => {
               value={loginData.email}
               errorStyle={styles.inputError}
               errorMessage={errLogin.password}
-              // errorMessage={"Hi"}
-
               onChangeText={(val) => setLoginData({ ...loginData, email: val })}
             />
           </View>
@@ -153,8 +142,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     borderColor: "black",
     borderWidth: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   loginBtn: {
     width: "40%",
@@ -168,7 +155,6 @@ const styles = StyleSheet.create({
   inputError: {
     color: "red",
     fontWeight: "bold",
-    // fontSize: "25",
   },
 });
 
