@@ -4,23 +4,27 @@ import { getDatabase, onValue, push, ref, remove, set, getInputVal } from "fireb
 import { getStorage, uploadBytesResumable } from "firebase/storage";
 import { initGvsuForumDB } from "./forum_config";
 export function addPost(item) {
+  const db = getDatabase();
+          //item.image = downloadURL;
+          const reference = ref(db,'posts/');
+          push(reference, item);
     console.log(item)
 
-    const app = initGvsuForumDB();
-    const storage = getStorage(app);
+  //   const app = initGvsuForumDB();
+  //   const storage = getStorage(app);
 
-    const storageRef = ref(storage, item.image);
-    // var storage = firebase.storage().ref(item.image);
+  //   const storageRef = ref(storage, item.image);
+  //   // var storage = firebase.storage().ref(item.image);
 
-  //get file url
-  storageRef
-    .getDownloadURL()
-    .then(function(url) {
-      console.log(url);
-    })
-    .catch(function(error) {
-      console.log("error encountered");
-    });
+  // //get file url
+  // storageRef
+  //   .getDownloadURL()
+  //   .then(function(url) {
+  //     console.log(url);
+  //   })
+  //   .catch(function(error) {
+  //     console.log("error encountered");
+  //   });
   //   const storage = getStorage(app);
 
   //   const storageRef = ref(storage, item.image);
@@ -110,6 +114,15 @@ export function addPost(item) {
       }
     });
   } 
+
+
+  export function updatePost(item) {
+    const key = item.id;
+    delete item.id;
+    const db = getDatabase();
+    const reference = ref(db,`posts/${key}`);
+    set(reference, item);
+  }
 
 
 export function stopPostsDataListener() {

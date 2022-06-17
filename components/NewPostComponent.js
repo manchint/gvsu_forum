@@ -18,9 +18,9 @@ const NewComponent = () => {
   const [postData, setPostData] = useState({
     text: "",
     image: null,
-    user: data.firstname,
-    likes: 0,
-    comments: 0,
+    user: 'wfcds',
+    likes: [],
+    comments: [],
     date: "",
   });
   useEffect(() => {
