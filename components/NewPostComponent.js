@@ -3,22 +3,28 @@ import React, { useEffect, useState } from "react";
 import { EvilIcons } from "@expo/vector-icons";
 import { Button, Input, Card } from "react-native-elements";
 
-import { Linking } from "react-native";
+import { Linking, AsyncStorage } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
+import { storage, getData } from "../helpers/storage_init";
 
 import { initGvsuForumDB } from "../helpers/forum_config";
-import { addPost } from "../helpers/forum_posts";
+import { addPost, uploadPostImage } from "../helpers/forum_posts";
 
 import { data } from "../helpers/user_config";
 import ImagePickerComponent from "./ImagePickerComponent";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const NewComponent = () => {
+  const [loginData, setLoginData] = useState();
+  // useEffect
+  // load
+  getData(setLoginData);
+  // const value = AsyncStorage.getItem("data");
   const [postData, setPostData] = useState({
     text: "",
     image: null,
-    user: 'wfcds',
+    user: "",
     likes: 0,
     comments: 0,
     date: "",
@@ -61,7 +67,13 @@ const NewComponent = () => {
     return date;
   }
   const onPostClickListerner = () => {
-    addPost({ ...postData, date: getTimestamp() });
+    //uploadPostImage(postData);
+
+    addPost({
+      ...postData,
+      date: getTimestamp(),
+      user: loginData?.email ? loginData?.email : "test",
+    });
   };
   return (
     <Card>
@@ -70,7 +82,9 @@ const NewComponent = () => {
           style={{ margin: 10, alignContent: "center", flexDirection: "row" }}
         >
           <FontAwesome name="user-circle-o" size={24} color="black" />
-          <Text style={{ marginLeft: 20 }}>Hello World</Text>
+          <Text style={{ marginLeft: 20 }}>
+            {loginData?.email ? loginData?.email : "test"}
+          </Text>
         </View>
         <View>
           <Input

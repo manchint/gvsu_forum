@@ -1,1 +1,1 @@
-export let data = {};
+export var data = {};

@@ -5,7 +5,9 @@ import {
   Text,
   View,
   TouchableOpacity,
+  AsyncStorage,
 } from "react-native";
+import { storage, saveData } from "../helpers/storage_init";
 import { Button, Input, Image } from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -16,7 +18,6 @@ const image = {
 
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupUsersDataListener } from "../helpers/forum_users";
-import { data } from "../helpers/user_config";
 
 const CryptoJS = require("crypto-js");
 
@@ -56,10 +57,16 @@ const Login = ({ route, navigation }) => {
     }
 
     if (isValidData) {
-      let data = usersData.filter((user) => user.email === loginData.email);
-      if (data.length > 0) {
-        if (decrypt(data[0].password) === loginData.password) {
-          data = data[0];
+      let response = usersData.filter((user) => user.email === loginData.email);
+      if (response.length > 0) {
+        if (decrypt(response[0].password) === loginData.password) {
+          //data = response[0];
+          // try {
+          //   AsyncStorage.setItem((data = response[0]));
+          // } catch (error) {
+          //   // Error saving data
+          // }
+          saveData(response[0]);
           navigation.navigate("Home");
         } else setErrLogin({ ...errLogin, password: "Wrong password" });
       } else {
@@ -67,6 +74,7 @@ const Login = ({ route, navigation }) => {
       }
     }
   };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
