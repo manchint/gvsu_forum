@@ -17,18 +17,18 @@ export default function App() {
   // storage();
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Login">
-        <Drawer.Screen name="Sign up" component={Signup} />
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Comments" component={CommentsScreen} />
-        <Drawer.Screen
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Sign up" component={Signup} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Comments" component={CommentsScreen} />
+        {/* <Stack.Screen
           name="GVSU Home"
           component={() =>
             Linking.openURL("https://lms.gvsu.edu/ultra/institution-page")
-          }
-        />
-        <Drawer.Screen
+          } */}
+        {/* /> */}
+        {/* <Drawer.Screen
           name="Black Board"
           component={() =>
             Linking.openURL("https://lms.gvsu.edu/ultra/institution-page")
@@ -45,13 +45,13 @@ export default function App() {
           component={() =>
             Linking.openURL("https://www.gvsu.edu/facultystaff.htm")
           }
-        />
+        /> */}
 
         {/* <Drawer.Screen name="BlackBoard"><Text style={{color: 'blue'}}
                 onPress={() => Linking.openURL('http://google.com')}>
             Google
             </Text></Drawer.Screen> */}
-      </Drawer.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

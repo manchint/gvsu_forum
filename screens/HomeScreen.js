@@ -53,16 +53,6 @@ const HomeScreen = ({ route, navigation }) => {
   }, [postData]);
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Feather
-            style={{ marginRight: 10 }}
-            name="menu"
-            size={24}
-            color="black"
-          />
-        </TouchableOpacity>
-      ),
       headerRight: () => (
         <View
           style={{
