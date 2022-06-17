@@ -10,7 +10,7 @@ import {
 import storage from 'firebase/storage';
 export function addPost(item) {
   const filename = item.image.substring(item.image.lastIndexOf('/') + 1);
-  const uploadUri = Platform.OS === 'ios' ? item.image.replace('file://', '') : item.image;
+  const uploadUri = item.image;
   const task = storage()
     .ref(filename)
     .putFile(uploadUri);
