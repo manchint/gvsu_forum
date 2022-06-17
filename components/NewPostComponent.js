@@ -90,15 +90,15 @@ const NewComponent = () => {
           <View style={{}}>
             <ImagePickerComponent
               image={postData.image}
-              onImagePicked={(img) => setPostData({ ...postData, image: img })}
+              setImage={(img) => setPostData({ ...postData, image: img })}
             />
           </View>
-          <MaterialIcons
+          {/* <MaterialIcons
             name="cancel"
             size={24}
             color="red"
             style={{ margin: 10, marginRight: 100 }}
-          />
+          /> */}
           <View style={{ flexDirection: "row", alignContent: "space-between" }}>
             <Button
               title={"Post"}

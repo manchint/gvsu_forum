@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
+import { Button, Image, View, Platform, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function ImagePickerComponent() {
-  const [image, setImage] = useState(null);
+import { AntDesign } from '@expo/vector-icons';
+export default function ImagePickerComponent({image, setImage}) {
+  //const [image, setImage] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -24,17 +26,27 @@ export default function ImagePickerComponent() {
       quality: 1,
     });
 
-    console.log(result);
+    console.log("media",result);
 
     if (!result.cancelled) {
       setImage(result.uri);
+      //onImagePicked(result.uri)
     }
   };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick an image" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+      
+      {image ? 
+        <View>
+          <TouchableOpacity onPress={() => setImage(null)}>
+          <AntDesign name="close" size={24} color="black" />
+          </TouchableOpacity>
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} /> 
+        </View>
+        :
+        <Button title="Pick an image" onPress={pickImage} /> 
+      } 
     </View>
   );
 }

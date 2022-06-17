@@ -14,6 +14,8 @@ import NewPostComponent from "../components/NewPostComponent";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupPostsDataListener } from "../helpers/forum_posts";
 
+
+
 import { data } from "../helpers/user_config";
 import { Button } from "react-native-elements";
 const HomeScreen = ({ route, navigation }) => {
@@ -44,7 +46,7 @@ const HomeScreen = ({ route, navigation }) => {
         </TouchableOpacity>
       ),
       headerRight: () => (
-        <Button title={"LOGOUT"} style={{ marginRight: 10 }}></Button>
+        <Button title={"LOGOUT"} style={{ marginRight: 10 }} onPress={() => navigation.navigate("Login")}></Button>
       ),
     });
   });
