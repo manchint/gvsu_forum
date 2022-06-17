@@ -10,41 +10,59 @@ import { TextInput } from "react-native-gesture-handler";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { addPost } from "../helpers/forum_posts";
 
-import { data  } from "../helpers/user_config";
-import ImagePickerComponent from './ImagePickerComponent';
-
+import { data } from "../helpers/user_config";
+import ImagePickerComponent from "./ImagePickerComponent";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const NewComponent = () => {
   const [postData, setPostData] = useState({
-    text: '',
+    text: "",
     image: null,
     user: data.firstname,
     likes: 0,
     comments: 0,
-    date: ''
-  })
+    date: "",
+  });
   useEffect(() => {
     try {
       initGvsuForumDB();
     } catch (err) {
-      console.log("An Error occurred while initializing DB"+err);
+      console.log("An Error occurred while initializing DB" + err);
     }
-  }, [])
+  }, []);
 
   //gets current timestamp in required format
   function getTimestamp() {
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "July",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     const today = new Date();
-    const date = days[today.getDay()] + ' '+
-        months[today.getMonth()] + ' ' +
-        today.getDate() + ' ' + today.getFullYear()
-    
+    const date =
+      days[today.getDay()] +
+      " " +
+      months[today.getMonth()] +
+      " " +
+      today.getDate() +
+      " " +
+      today.getFullYear();
+
     return date;
   }
   const onPostClickListerner = () => {
-    addPost({...postData, date:getTimestamp()})
-  }
+    addPost({ ...postData, date: getTimestamp() });
+  };
   return (
     <Card>
       <View>
@@ -59,7 +77,7 @@ const NewComponent = () => {
             placeholder="Had a Query? Post Here..!"
             leftIcon={{ type: "font-awesome", name: "comment" }}
             style={{ borderRadius: 10, borderWidth: 1 }}
-            onChangeText={(val) => setPostData({...postData, text:val})}
+            onChangeText={(val) => setPostData({ ...postData, text: val })}
             value={postData.text}
           ></Input>
         </View>
@@ -69,11 +87,30 @@ const NewComponent = () => {
             justifyContent: "space-between",
           }}
         >
-          <View>
-            <ImagePickerComponent image={postData.image} onImagePicked={(img) => setPostData({...postData, image:img})}/>
+          <View style={{ flexDirection: "row" }}>
+            <ImagePickerComponent
+              image={postData.image}
+              onImagePicked={(img) => setPostData({ ...postData, image: img })}
+            />
+            <MaterialIcons
+              name="cancel"
+              size={24}
+              color="red"
+              style={{ margin: 10 }}
+            />
           </View>
-          <View>
-            <Button title={"Post"} disabled={postData.text.length <= 0} onPress={onPostClickListerner}></Button>
+          <View style={{ flexDirection: "row", alignContent: "space-between" }}>
+            <Button
+              title={"Post"}
+              disabled={postData.text.length <= 0}
+              onPress={onPostClickListerner}
+              style={{ marginRight: 10 }}
+            ></Button>
+            <Button
+              title={"Cancel"}
+              disabled={postData.text.length <= 0}
+              onPress={onPostClickListerner}
+            ></Button>
           </View>
         </View>
       </View>

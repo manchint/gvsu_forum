@@ -18,21 +18,21 @@ import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupUsersDataListener } from "../helpers/forum_users";
 import { data } from "../helpers/user_config";
 
-const CryptoJS = require('crypto-js');
+const CryptoJS = require("crypto-js");
 
 const decrypt = (data) => {
   return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
 };
-const Login = ({route, navigation}) => {
+const Login = ({ route, navigation }) => {
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [errLogin, setErrLogin] = useState({
-    email: '',
-    password: ''
-  })
-  const [usersData, setUsersData] = useState([])
+    email: "",
+    password: "",
+  });
+  const [usersData, setUsersData] = useState([]);
   useEffect(() => {
     try {
       initGvsuForumDB();
@@ -42,32 +42,31 @@ const Login = ({route, navigation}) => {
     setupUsersDataListener((users) => {
       setUsersData(users);
     });
-  }, [])
+  }, []);
 
   const validateAndLogin = () => {
-    let isValidData = true
-    if (loginData.email === '') {
+    let isValidData = true;
+    if (loginData.email === "") {
       isValidData = false;
-      setErrLogin({...errLogin, email:'Please enter your email'});
+      setErrLogin({ ...errLogin, email: "Please enter your email" });
     }
-    if (loginData.password === '') {
+    if (loginData.password === "") {
       isValidData = false;
-      setErrLogin({...errLogin, password: 'Please enter your password'})
+      setErrLogin({ ...errLogin, password: "Please enter your password" });
     }
 
-    if(isValidData) {
-      let data = usersData.filter(user => user.email === loginData.email)
+    if (isValidData) {
+      let data = usersData.filter((user) => user.email === loginData.email);
       if (data.length > 0) {
-        if(decrypt(data[0].password) === loginData.password) {
-          data = data[0]
-          navigation.navigate("Home")
-        }
-        else setErrLogin({...errLogin, password: 'Wrong password'})
+        if (decrypt(data[0].password) === loginData.password) {
+          data = data[0];
+          navigation.navigate("Home");
+        } else setErrLogin({ ...errLogin, password: "Wrong password" });
       } else {
         //display error message no user found
       }
     }
-  }
+  };
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
@@ -80,7 +79,7 @@ const Login = ({route, navigation}) => {
               value={loginData.email}
               errorStyle={styles.inputError}
               errorMessage={errLogin.password}
-              onChangeText={(val) => setLoginData({...loginData, email:val})}
+              onChangeText={(val) => setLoginData({ ...loginData, email: val })}
             />
           </View>
           <View style={styles.inputView}>
@@ -92,17 +91,20 @@ const Login = ({route, navigation}) => {
               secureTextEntry={true} //for not displaying the password
               errorStyle={styles.inputError}
               errorMessage={errLogin.password}
-              onChangeText={(val) => setLoginData({...loginData, password:val})}
+              onChangeText={(val) =>
+                setLoginData({ ...loginData, password: val })
+              }
             />
           </View>
-          <Button style={styles.loginText} onPress={validateAndLogin}>LOGIN</Button>
-          {/* <TouchableOpacity style={styles.loginBtn}>
-            
-          </TouchableOpacity> */}
+          <Button
+            style={{}}
+            title={"LOGIN"}
+            onPress={validateAndLogin}
+          ></Button>
         </View>
       </ImageBackground>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
