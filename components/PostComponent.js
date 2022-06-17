@@ -48,20 +48,7 @@ const PostComponent = (props) => {
     }
     updatePost({ ...props.item, likes: likes });
   };
-  const updateComment = () => {
-    let comments = props.item.comments;
-    if (comments === 0) {
-      comments = [{ name: data.firstname, comment: "sdvcdsvs" }];
-      //updatePost({ ...props.item, likes: ['sdcsdc']});
-    } else {
-      comments.push([{ name: data.firstname, comment: "sdvcdsvs" }]);
-      // if (checkCurrentUserLike()) {
-      //     likes = postData.likes.filter(item => item !== 'fdvcdfvx')
-      // }
-      //updatePost({ ...props.item, likes: ['sdcsdc']});
-    }
-    updatePost({ ...props.item, comments: comments });
-  };
+
   return (
     <Card>
       <View style={[styles.margin20, styles.borderBottom]}>
@@ -97,7 +84,7 @@ const PostComponent = (props) => {
                 ? ` ${props.item.comments} Comments`
                 : `${props.item.comments.length} Comments`
             }
-            onPress={() => props.navigateToComments(props.item.comments)}
+            onPress={() => props.navigateToComments(props.item)}
           ></Button>
         </View>
       </View>
