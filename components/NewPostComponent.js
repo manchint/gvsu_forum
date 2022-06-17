@@ -19,8 +19,8 @@ const NewComponent = () => {
     text: "",
     image: null,
     user: 'wfcds',
-    likes: [],
-    comments: [],
+    likes: 0,
+    comments: 0,
     date: "",
   });
   useEffect(() => {

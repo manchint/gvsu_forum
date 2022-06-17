@@ -8,6 +8,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "./screens/HomeScreen";
 import Signup from "./screens/Signup";
 import Login from "./screens/Login";
+import CommentsScreen from "./screens/CommentsScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -19,6 +20,7 @@ export default function App() {
         <Drawer.Screen name="Sign up" component={Signup} />
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Comments" component={CommentsScreen} />
         <Drawer.Screen
           name="GVSU Home"
           component={() =>

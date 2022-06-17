@@ -119,8 +119,12 @@ const HomeScreen = ({ route, navigation }) => {
     });
   });
 
+  const navigateToComments = (data) => {
+    navigation.navigate('Comments', {data:data})
+  }
+  
   const renderEachPost = (data) => {
-    return <PostComponent item={data.item} />;
+    return <PostComponent item={data.item} navigateToComments={navigateToComments}/>;
   };
   return (
     <View>
@@ -136,7 +140,7 @@ const HomeScreen = ({ route, navigation }) => {
       ) : (
         <NewPostComponent></NewPostComponent>
       )}
-      <FlatList data={postData} renderItem={renderEachPost} />
+      <FlatList data={postData} renderItem={renderEachPost}/>
     </View>
   );
 };
