@@ -50,7 +50,7 @@ const PostComponent = (props) => {
 
   return (
     <Card>
-      <View style={[styles.margin20, styles.borderBottom]}>
+      <View style={[styles.margin20, styles.border1]}>
         <View style={[styles.flexHorizontal]}>
           <EvilIcons
             name="user"
@@ -114,9 +114,7 @@ const styles = StyleSheet.create({
   border: {
     border: "1px",
   },
-  borderBottom: {
-    borderBottom: "1px",
-  },
+  border1: {},
   padding10: {
     padding: 10,
   },
