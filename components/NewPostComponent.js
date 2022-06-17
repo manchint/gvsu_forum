@@ -11,7 +11,6 @@ import { storage, getData } from "../helpers/storage_init";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { addPost, uploadPostImage } from "../helpers/forum_posts";
 
-import { data } from "../helpers/user_config";
 import ImagePickerComponent from "./ImagePickerComponent";
 import { MaterialIcons } from "@expo/vector-icons";
 

@@ -7,7 +7,6 @@ import { EvilIcons } from "@expo/vector-icons";
 import { updatePost } from "../helpers/forum_posts";
 import { getData } from "../helpers/storage_init";
 
-
 const CommentsScreen = ({ route }) => {
   const [loginData, setLoginData] = useState();
   getData(setLoginData);
@@ -15,16 +14,12 @@ const CommentsScreen = ({ route }) => {
   const renderEachComment = (data) => {
     console.log("dhsahf", data);
     return (
-      <Card key={`${route.params.data.id} ${data.index}`} style={{}}>
-        <Text style={{ flexDirection: "row" }}>
-          <EvilIcons
-            name="user"
-            size={24}
-            color="black"
-            style={{ marginTop: 10 }}
-          />
-          {data.item.name}
-        </Text>
+      <Card key={`${route.params.data.id} ${data.index}`}>
+        <View style={{ flexDirection: "row" }}>
+          <EvilIcons name="user" size={24} color="black" style={{}} />
+          <Text style={{ marginLeft: 10 }}>{data.item.name}</Text>
+        </View>
+
         <Text>Comment: {data.item.comment}</Text>
       </Card>
     );
@@ -37,6 +32,7 @@ const CommentsScreen = ({ route }) => {
       comments.push({ name: loginData.email, comment: comment });
     }
     updatePost({ ...route.params.data, comments: comments });
+    setComment("");
   };
   return (
     <View style={{ flex: 1 }}>
@@ -51,7 +47,7 @@ const CommentsScreen = ({ route }) => {
         style={{ margin: 10 }}
         disabled={comment.length <= 0}
       ></Button>
-      <Text>History of Comments</Text>
+      <Text>Comments History</Text>
       <FlatList
         data={route.params.data.comments}
         renderItem={renderEachComment}

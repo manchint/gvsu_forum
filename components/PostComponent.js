@@ -8,7 +8,6 @@ import { Linking } from "react-native";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { updatePost } from "../helpers/forum_posts";
 
-import { data } from "../helpers/user_config";
 const PostComponent = (props) => {
   useEffect(() => {
     try {

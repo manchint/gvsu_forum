@@ -1,22 +1,28 @@
-import {
-  View,
-  FlatList,
-  Linking,
-} from "react-native";
+import { View, FlatList, Linking } from "react-native";
 import React, { useEffect, useState } from "react";
 import { EvilIcons } from "@expo/vector-icons";
-import SelectDropdown from "react-native-select-dropdown";
-//components
 import PostComponent from "../components/PostComponent";
 import NewPostComponent from "../components/NewPostComponent";
 //helpers files
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { setupPostsDataListener } from "../helpers/forum_posts";
-import { data } from "../helpers/user_config";
-import { removeData } from "../helpers/storage_init";
 
-const options = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF", "LOGOUT"];
+import SelectDropdown from "react-native-select-dropdown";
+
+import { removeData } from "../helpers/storage_init";
+import { getData } from "../helpers/storage_init";
+
+const options = [
+  "GVSU HOME",
+  "BLACK BOARD",
+  "BANNER",
+  "FACULTY STAFF",
+  "LOGOUT",
+];
+
 const HomeScreen = ({ route, navigation }) => {
+  const [loginData, setLoginData] = useState();
+  getData(setLoginData);
   const [postData, setPostsData] = useState([]);
   useEffect(() => {
     try {
@@ -60,10 +66,10 @@ const HomeScreen = ({ route, navigation }) => {
                 Linking.openURL("https://www.gvsu.edu/banner/");
               else if (selectedItem === "FACULTY STAFF")
                 Linking.openURL("https://www.gvsu.edu/facultystaff.htm");
-              else if (selectedItem === 'LOGOUT') {
-                removeData()
-                navigation.navigate('login')
-              } 
+              else if (selectedItem === "LOGOUT") {
+                removeData();
+                navigation.navigate("login");
+              }
             }}
             buttonTextAfterSelection={() => {
               return <EvilIcons name="user" size={24} color="black" />;
@@ -92,7 +98,7 @@ const HomeScreen = ({ route, navigation }) => {
 
   return (
     <View>
-      {data.email ? (
+      {loginData?.email ? (
         <NewPostComponent />
       ) : (
         <NewPostComponent></NewPostComponent>
