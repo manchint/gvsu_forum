@@ -3,6 +3,8 @@ import { Text, View, FlatList, Linking } from "react-native";
 import { updatePost } from "../helpers/forum_posts";
 import { getData } from "../helpers/storage_init";
 import { Button, Input, Card } from "react-native-elements";
+import { EvilIcons } from "@expo/vector-icons";
+
 const CommentsScreen = ({ route }) => {
   const [loginData, setLoginData] = useState();
   const [comments, setComments] = useState([]);
@@ -12,7 +14,15 @@ const CommentsScreen = ({ route }) => {
     console.log("dhsahf", data);
     return (
       <Card key={`${route.params.data.id} ${data.index}`} style={{}}>
-        <Text> {data.item.name}</Text>
+        <Text style={{ flexDirection: "row" }}>
+          <EvilIcons
+            name="user"
+            size={24}
+            color="black"
+            style={{ marginTop: 10 }}
+          />
+          {data.item.name}
+        </Text>
         <Text>Comment: {data.item.comment}</Text>
       </Card>
     );
