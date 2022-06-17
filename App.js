@@ -18,11 +18,10 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Login">
         <Drawer.Screen name="Sign up" component={Signup} />
         <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Home" component={HomeScreen}  initialParams={{name:'dhgfdjsgf'}}/>
+        <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen
           name="GVSU Home"
-          component={() => Linking.openURL("https://www.gvsu.edu/")}
-          initialParams={{name:'dhgfdjsgf'}}
+          component={() => Linking.openURL("https://lms.gvsu.edu/ultra/institution-page")}
         />
         <Drawer.Screen
           name="Black Board"
