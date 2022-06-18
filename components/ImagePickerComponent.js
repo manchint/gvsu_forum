@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, Platform, TouchableOpacity, Alert, Modal } from "react-native";
+import { Button, Image, View, Platform, TouchableOpacity, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Permissions from 'expo-permissions';
@@ -26,31 +26,36 @@ export default function ImagePickerComponent({ image, setImage }) {
             alert("Permission to access camera is required!");
             return;
           }
-          result = await ImagePicker.launchCameraAsync({
+          let result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
           });
+          alert("media", result);
+
+          if (!result?.cancelled) {
+            setImage(result?.uri);
+            //onImagePicked(result.uri)
+          }
     } else {
       let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (permission.granted === false) {
         alert("Permission to access camera roll is required!");
         return;
       }
-      result = await ImagePicker.launchImageLibraryAsync({
+      let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
       });
-    }
+      alert("media", result);
 
-    console.log("media", result);
-
-    if (!result?.cancelled) {
-      setImage(result?.uri);
-      //onImagePicked(result.uri)
+      if (!result?.cancelled) {
+        setImage(result?.uri);
+        //onImagePicked(result.uri)
+      }
     }
   };
 

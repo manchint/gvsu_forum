@@ -110,7 +110,7 @@ const NewComponent = () => {
           <View style={{ flexDirection: "row", alignContent: "space-between" }}>
             <Button
               title={"Post"}
-              disabled={postData.text.length <= 0 || postData.image === null}
+              disabled={postData.text.length <= 0}
               onPress={onPostClickListerner}
               style={{ marginRight: 10 }}
             ></Button>

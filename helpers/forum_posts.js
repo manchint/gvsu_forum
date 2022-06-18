@@ -1,31 +1,99 @@
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 // import {firebase} from '@react-native-firebase/app';
-import { initGvsuForumDB } from "./forum_config";
+import { initGvsuForumDB, getFirebaseObject } from "./forum_config";
 import * as FileSystem from "expo-file-system";
-import firebase from "firebase/app";
+//import firebase from "firebase/app";
+import uuid from 'uuid';
 
-const getBase64StringFromDataURL = (dataURL) =>
+
+//import firebase from "firebase/app";
+ 
+const getBase64StringFromDataURL = (dataURL) => {
+  dataURL.replace("file://", "")
   dataURL.replace("data:", "").replace(/^.+,/, "");
-export function addPost(item) {
-  //console.log('Image uploaded to the bucket!');
+  return dataURL
+}
+export const addPost = async (item) => {
   const db = getDatabase();
+  // const firebase = getFirebaseObject()
+  // const storage = getStorage()
+  // const storageRef = ref(storage, `postImages/${item.id}`);
+
+  // storageRef.put(file).then((snapshot) => {
+  //   console.log("Uploaded!");
+  // });
+
+
+
+  
+
+
+  // const blob = await new Promise((resolve, reject) => {
+  //   const xhr = new XMLHttpRequest();
+  //   xhr.onload = function() {
+  //     resolve(xhr.response);
+  //   };
+  //   xhr.onerror = function(e) {
+  //     console.log(e);
+  //     reject(new TypeError('Network request failed'));
+  //   };
+  //   xhr.responseType = 'blob';
+  //   xhr.open('GET', item.image, true);
+  //   xhr.send(null);
+  // });
+
+  // const ref = firebase
+  //   .storage()
+  //   .ref(db, "posts/")
+  //   .child(uuid.v4());
+  // const snapshot = await ref.put(blob);
+
+  // // We're done with the blob, close and release it
+  // blob.close();
+  // console.log(await snapshot.ref.getDownloadURL())
+
+  //return await snapshot.ref.getDownloadURL();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //console.log('Image uploaded to the bucket!');
+  //const db = getDatabase();
   item.image = getBase64StringFromDataURL(item.image);
   const reference = ref(db, "posts/");
   push(reference, item);
 
-  //   const filename = item.image.substring(item.image.lastIndexOf('/') + 1);
-  //   console.log(filename)
-  //   getFileBlob(item.image, blob =>{
-  //     firebase.storage().ref().put(blob).then(function(snapshot) {
-  //        console.log('Uploaded a blob or file!');
-  //     })
-  // })
+  // const filename = item.image.substring(item.image.lastIndexOf('/') + 1);
+  // //   console.log(filename)
+  // //   getFileBlob(item.image, blob =>{
+  // //     firebase.storage().ref().put(blob).then(function(snapshot) {
+  // //        console.log('Uploaded a blob or file!');
+  // //     })
+  // // })
 
-  // const file = FileSystem.readAsStringAsync(item.image, {
-  //   encoding: FileSystem.EncodingType.Base64,
-  // });
+  // // const file = FileSystem.readAsStringAsync(item.image, {
+  // //   encoding: FileSystem.EncodingType.Base64,
+  // // });
 
   // // Create a ref in Firebase (I'm using my user's ID)
+  // //const storage = getStorage();
   // const ref = firebase.storage().ref().child(`postImages/${item.id}`);
 
   // // Upload Base64 image to Firebase
@@ -35,11 +103,12 @@ export function addPost(item) {
   // const remoteURL = snapshot.ref.getDownloadURL();
 
   // console.log(remoteURL)
-  // Return the URL
-  //return remoteURL;
+  // //Return the URL
+  // return remoteURL;
 
   // const uploadUri = item.image;
-  // const task = storage()
+  // const task = firebase
+  //   .storage()
   //   .ref(filename)
   //   .putFile(uploadUri);
   // // set progress state
@@ -53,9 +122,10 @@ export function addPost(item) {
   // } catch (e) {
   //   console.error(e);
   // }
-  // task.then(() => {
+  // task.then((snapshot) => {
   //   console.log('Image uploaded to the bucket!');
   //   const db = getDatabase();
+  //   item.image = snapshot.ref.getDownloadURL();
   //   const reference = ref(db, "posts/");
   //   push(reference, item);
   // });
