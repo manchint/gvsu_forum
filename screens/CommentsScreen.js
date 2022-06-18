@@ -41,13 +41,13 @@ const CommentsScreen = ({ route }) => {
         value={comment}
         placeholder={"Enter Your Thoughts"}
         onChangeText={(val) => setComment(val)}
-        disabled={loginData?.email}
+        disabled={!loginData?.email}
       ></Input>
       <Button
         title={"Comment"}
         onPress={updateComment}
         style={{ margin: 10 }}
-        disabled={comment.length <= 0 || loginData?.email}
+        disabled={comment.length <= 0 || !loginData?.email}
       ></Button>
       <Text>Comments History</Text>
       <FlatList

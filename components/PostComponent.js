@@ -64,6 +64,7 @@ const PostComponent = (props) => {
           <Image
             source={{ uri: props.item.image }}
             style={{ width: 200, height: 200 }}
+            accessibilityLabel={'Failed to load Image'}
           />
         ) : (
           <></>
@@ -77,7 +78,7 @@ const PostComponent = (props) => {
                 : `${props.item?.likes.length} Likes`
             }
             onPress={updateLike}
-            disabled={loginData?.email}
+            disabled={!loginData?.email}
           ></Button>
           <Button
             style={[styles.padding10]}

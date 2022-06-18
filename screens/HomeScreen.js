@@ -1,4 +1,4 @@
-import { View, FlatList, Linking, Picker, Button } from "react-native";
+import { View, FlatList, Linking, Picker, Button, Text } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import React, { useEffect, useState } from "react";
@@ -19,7 +19,6 @@ const HomeScreen = ({ route, navigation }) => {
   getData(setLoginData);
   const [postData, setPostsData] = useState([]);
   const options = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF"];
-  var logButton = loginData?.email ? "LOGOUT" : "LOGIN";
   console.log("Button", loginData?.email);
   // options.push(loginData?.email ? "LOGOUT" : "LOGIN");
   useEffect(() => {
@@ -45,6 +44,7 @@ const HomeScreen = ({ route, navigation }) => {
             // width: 50,
             alignContent: "center",
             flexDirection: "row",
+            backgroundColor: 'white'
           }}
         >
           <SelectDropdown
@@ -55,7 +55,7 @@ const HomeScreen = ({ route, navigation }) => {
                 size={40}
                 color="blue"
                 alignContent={"center"}
-                backgroundColor="white"
+                backgroundColor="#fff"
               />
             }
             // rowStyle={"View"}
@@ -91,11 +91,8 @@ const HomeScreen = ({ route, navigation }) => {
               return item;
             }}
           />
-          <Button
-            style={{}}
-            title={logButton}
-            onPress={() => navigation.navigate("Login")}
-          ></Button>
+          <Text
+            onPress={() => {if (!loginData?.email) navigation.navigate("Login")}}>{loginData?.email ? loginData.firstname : "LOGIN"}</Text>
         </View>
       ),
     });
@@ -116,7 +113,7 @@ const HomeScreen = ({ route, navigation }) => {
 
   return (
     <View>
-      {loginData?.email ? <></> : <NewPostComponent />}
+      {!loginData?.email ? <></> : <NewPostComponent />}
       <FlatList data={postData} renderItem={renderEachPost} />
     </View>
   );
