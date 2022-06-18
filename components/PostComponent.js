@@ -60,7 +60,14 @@ const PostComponent = (props) => {
         <View style={[styles.border]}>
           <Text style={[styles.margin5]}>{props.item.text}</Text>
         </View>
-        {props.item?.image ? <Image source={{uri: props.item.image}} style={{ width: 200, height: 200 }} /> : <></>}
+        {props.item?.image ? (
+          <Image
+            source={{ uri: props.item.image }}
+            style={{ width: 200, height: 200 }}
+          />
+        ) : (
+          <></>
+        )}
         <View style={[styles.flexHorizontal]}>
           <Button
             style={[styles.padding10]}
@@ -70,6 +77,7 @@ const PostComponent = (props) => {
                 : `${props.item?.likes.length} Likes`
             }
             onPress={updateLike}
+            disabled={loginData?.email}
           ></Button>
           <Button
             style={[styles.padding10]}
