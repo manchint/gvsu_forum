@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { EvilIcons } from "@expo/vector-icons";
 import { Button, Card } from "react-native-elements";
@@ -66,6 +66,7 @@ const PostComponent = (props) => {
         <View style={[styles.border]}>
           <Text style={[styles.margin5]}>{props.item.text}</Text>
         </View>
+        {props.item?.image ? <Image source={{uri: `data:image/gif;base64,${(props.item.image)}`}} style={{ width: 200, height: 200 }} /> : <></>}
         <View style={[styles.flexHorizontal]}>
           <Button
             style={[styles.padding10]}

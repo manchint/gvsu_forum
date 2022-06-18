@@ -13,7 +13,6 @@ const CommentsScreen = ({ route }) => {
   getData(setLoginData);
   const [comment, setComment] = useState("");
   const renderEachComment = (data) => {
-    console.log("dhsahf", data);
     return (
       <Card key={`${route.params.data.id} ${data.index}`}>
         <View style={{ flexDirection: "row" }}>
