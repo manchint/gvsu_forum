@@ -1,25 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { EvilIcons } from "@expo/vector-icons";
 import { Button, Input, Card } from "react-native-elements";
 
-import { Linking, AsyncStorage } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
-import { storage, getData } from "../helpers/storage_init";
+import { getData } from "../helpers/storage_init";
 
 import { initGvsuForumDB } from "../helpers/forum_config";
-import { addPost, uploadPostImage } from "../helpers/forum_posts";
+import { addPost } from "../helpers/forum_posts";
 
 import ImagePickerComponent from "./ImagePickerComponent";
-import { MaterialIcons } from "@expo/vector-icons";
 
 const NewComponent = () => {
   const [loginData, setLoginData] = useState();
-  // useEffect
-  // load
   getData(setLoginData);
-  // const value = AsyncStorage.getItem("data");
   const [postData, setPostData] = useState({
     text: "",
     image: null,
@@ -114,16 +107,10 @@ const NewComponent = () => {
               setImage={(img) => setPostData({ ...postData, image: img })}
             />
           </View>
-          {/* <MaterialIcons
-            name="cancel"
-            size={24}
-            color="red"
-            style={{ margin: 10, marginRight: 100 }}
-          /> */}
           <View style={{ flexDirection: "row", alignContent: "space-between" }}>
             <Button
               title={"Post"}
-              disabled={postData.text.length <= 0}
+              disabled={postData.text.length <= 0 || postData.image === null}
               onPress={onPostClickListerner}
               style={{ marginRight: 10 }}
             ></Button>

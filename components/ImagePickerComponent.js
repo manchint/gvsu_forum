@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, Platform, TouchableOpacity } from "react-native";
+import { Button, Image, View, Platform, TouchableOpacity, Alert, Modal } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as Permissions from 'expo-permissions';
 
 import { AntDesign } from "@expo/vector-icons";
 export default function ImagePickerComponent({ image, setImage }) {
+  const [imageOption, setImageOption] = useState('')
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -17,21 +19,54 @@ export default function ImagePickerComponent({ image, setImage }) {
     })();
   }, []);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  const pickImage = async (option) => {
+        if(option === 'camera') {
+          let permission = await ImagePicker.requestCameraPermissionsAsync()
+          if (permission.granted === false) {
+            alert("Permission to access camera is required!");
+            return;
+          }
+          result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+    } else {
+      let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (permission.granted === false) {
+        alert("Permission to access camera roll is required!");
+        return;
+      }
+      result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+    }
 
     console.log("media", result);
 
-    if (!result.cancelled) {
-      setImage(result.uri);
+    if (!result?.cancelled) {
+      setImage(result?.uri);
       //onImagePicked(result.uri)
     }
   };
+
+  const openOptions=()=>{
+    Alert.alert(
+      'Hey There!',
+      'Two button alert dialog',
+      [
+        {text: 'Upload fromGallery', onPress: () => pickImage('gallery')},
+        {text: 'Take photo', onPress: () => pickImage('camera'), style: 'cancel'},
+      ],
+      { 
+        cancelable: true 
+      }
+    );
+  }
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -43,7 +78,7 @@ export default function ImagePickerComponent({ image, setImage }) {
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         </View>
       ) : (
-        <Button title="Pick an image" onPress={pickImage} />
+        <Button title="Pick an image" onPress={openOptions} />
       )}
     </View>
   );
