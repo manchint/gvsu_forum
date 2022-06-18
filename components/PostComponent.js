@@ -4,7 +4,6 @@ import { EvilIcons } from "@expo/vector-icons";
 import { Button, Card } from "react-native-elements";
 import { getData } from "../helpers/storage_init";
 
-import { Linking } from "react-native";
 import { initGvsuForumDB } from "../helpers/forum_config";
 import { updatePost } from "../helpers/forum_posts";
 
@@ -20,20 +19,16 @@ const PostComponent = (props) => {
     console.log("loginData", loginData.email);
     var currentUserLike = props.item.likes.filter(
       (item) => item == loginData.email
-      // (item) => console.log("iii", item)
     );
     console.log("crr", currentUserLike);
     return currentUserLike.length > 0;
   };
   const [loginData, setLoginData] = useState();
-  // useEffect
-  // load
   getData(setLoginData);
   const updateLike = () => {
     let likes = props.item.likes;
     if (likes === 0) {
       likes = [loginData.email];
-      //updatePost({ ...props.item, likes: ['sdcsdc']});
     } else {
       if (checkCurrentUserLike()) {
         likes = props.item?.likes.filter((item) => item !== loginData.email);
@@ -41,9 +36,8 @@ const PostComponent = (props) => {
         likes = likes.length === 0 ? 0 : likes;
         console.log("Number", likes);
       } else {
-        likes.push([loginData.email]);
+        likes.push(loginData.email);
       }
-      //updatePost({ ...props.item, likes: ['sdcsdc']});
     }
     updatePost({ ...props.item, likes: likes });
   };
