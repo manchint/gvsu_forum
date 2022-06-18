@@ -11,14 +11,14 @@ import { setupPostsDataListener } from "../helpers/forum_posts";
 
 import SelectDropdown from "react-native-select-dropdown";
 
-import { getData,removeData } from "../helpers/storage_init";
+import { getData, removeData } from "../helpers/storage_init";
 
 const HomeScreen = ({ route, navigation }) => {
   const [loginData, setLoginData] = useState();
   getData(setLoginData);
   const [postData, setPostsData] = useState([]);
   const options = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF"];
-  if(loginData?.email) options.push("LOGOUT");
+  if (loginData?.email) options.push("LOGOUT");
   useEffect(() => {
     try {
       initGvsuForumDB();
@@ -42,7 +42,7 @@ const HomeScreen = ({ route, navigation }) => {
             // width: 50,
             alignContent: "center",
             flexDirection: "row",
-            backgroundColor: 'white'
+            backgroundColor: "white",
           }}
         >
           <SelectDropdown
@@ -92,10 +92,16 @@ const HomeScreen = ({ route, navigation }) => {
               return item;
             }}
           />
-          {loginData?.email ? 
-            <Text>{loginData.firstname}</Text> : 
-            <Button title={'LOGIN'} onPress={() => {navigation.navigate("Login")}}></Button>
-          }
+          {loginData?.email ? (
+            <Text>{loginData.firstname}</Text>
+          ) : (
+            <Button
+              title={"LOGIN"}
+              onPress={() => {
+                navigation.navigate("Login");
+              }}
+            ></Button>
+          )}
         </View>
       ),
     });
