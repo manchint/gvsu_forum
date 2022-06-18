@@ -13,7 +13,6 @@ import SelectDropdown from "react-native-select-dropdown";
 
 import { removeData } from "../helpers/storage_init";
 import { getData } from "../helpers/storage_init";
-// import { Picker } from "react-native-web";
 
 const options = [
   "GVSU HOME",
@@ -37,21 +36,20 @@ const HomeScreen = ({ route, navigation }) => {
       setPostsData(posts);
     });
   }, []);
-  const icon = () => {
-    return <EvilIcons name="user" size={40} color="blue" />;
-  };
+
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <></>,
       headerRight: () => (
         <View
           style={{
-            marginRight: 25,
+            marginRight: 65,
             width: 100,
             alignContent: "center",
           }}
         >
           <SelectDropdown
+            style={{ backgroundColor: "yellow" }}
             data={options}
             defaultButtonText={
               <EvilIcons
@@ -59,9 +57,11 @@ const HomeScreen = ({ route, navigation }) => {
                 size={40}
                 color="blue"
                 alignContent={"center"}
+                backgroundColor="white"
               />
             }
             // rowStyle={"View"}
+            dropdownBackgroundColor="blue"
             dropdownIconPosition={"left"}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
@@ -79,7 +79,14 @@ const HomeScreen = ({ route, navigation }) => {
               }
             }}
             buttonTextAfterSelection={() => {
-              return <EvilIcons name="user" size={40} color="blue" />;
+              return (
+                <EvilIcons
+                  name="user"
+                  size={40}
+                  color="blue"
+                  backgroundColor="white"
+                />
+              );
             }}
             rowTextForSelection={(item, index) => {
               return item;

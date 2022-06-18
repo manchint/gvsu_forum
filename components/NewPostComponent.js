@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View, Platform } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button, Input, Card } from "react-native-elements";
 
