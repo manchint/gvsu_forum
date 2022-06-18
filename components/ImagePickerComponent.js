@@ -31,6 +31,7 @@ export default function ImagePickerComponent({ image, setImage }) {
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
+            base64: true
           });
           alert("media", result);
 
@@ -49,6 +50,7 @@ export default function ImagePickerComponent({ image, setImage }) {
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
+        base64: true
       });
       alert("media", result);
 
