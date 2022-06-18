@@ -4,19 +4,6 @@ import { initGvsuForumDB } from "./forum_config";
 import * as FileSystem from "expo-file-system";
 import firebase from "firebase/app";
 
-var XMLHttpRequest = require("xhr2");
-var xhr = new XMLHttpRequest();
-
-const getFileBlob = function (url, cb) {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url);
-  xhr.responseType = "blob";
-  xhr.addEventListener("load", function () {
-    cb(xhr.response);
-  });
-  xhr.send();
-};
-
 const getBase64StringFromDataURL = (dataURL) =>
   dataURL.replace("data:", "").replace(/^.+,/, "");
 export function addPost(item) {
