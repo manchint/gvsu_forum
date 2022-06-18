@@ -37,12 +37,11 @@ const Login = ({ route, navigation }) => {
     setupUsersDataListener((users) => {
       setUsersData(users);
     });
-  }, []);
-  useEffect(() => {
     if (loginData.email) {
       navigation.navigate("Home");
     }
-  }, [loginData]);
+  }, []);
+
   const validateAndLogin = () => {
     let isValidData = true;
     if (loginData.email === "") {

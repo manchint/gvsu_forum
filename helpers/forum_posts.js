@@ -5,17 +5,17 @@ import * as FileSystem from "expo-file-system";
 import firebase from "firebase/app";
 import base64 from "react-native-base64";
 
-const getBase64StringFromDataURL = (dataURL) =>
+const getBase64StringFromDataURL = (dataURL) => {
   dataURL.replace("data:", "").replace(/^.+,/, "");
-  return dataURL
-}
+  return dataURL;
+};
 export const addPost = async (item) => {
   const db = getDatabase();
   item.image = getBase64StringFromDataURL(item.image);
   // item.image = base64.encode(item.image);
   const reference = ref(db, "posts/");
   push(reference, item);
-}
+};
 
 export function setupPostsDataListener(updateFunc) {
   const db = getDatabase();
@@ -47,10 +47,13 @@ export function updatePost(item) {
 
 export function stopDataListener(collection_id) {
   const db = getDatabase();
-  let unsubscribe = firebase.firestore().collection(collection_id).onSnapshot((snapshot) =>
-  console.log("stopPostsDataListener fires up with: ", snapshot)
-  );
-  unsubscribe();
+  // let unsubscribe = firebase
+  //   .firestore()
+  //   .collection(collection_id)
+  //   .onSnapshot((snapshot) =>
+  //     console.log("stopPostsDataListener fires up with: ", snapshot)
+  //   );
+  // unsubscribe();
   // const reference = ref(db, "posts/");
   // push(reference, item);
 }
