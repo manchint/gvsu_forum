@@ -1,4 +1,6 @@
-import { View, FlatList, Linking } from "react-native";
+import { View, FlatList, Linking, Picker } from "react-native";
+import DropDownPicker from "react-native-dropdown-picker";
+
 import React, { useEffect, useState } from "react";
 import { EvilIcons } from "@expo/vector-icons";
 import PostComponent from "../components/PostComponent";
@@ -11,6 +13,7 @@ import SelectDropdown from "react-native-select-dropdown";
 
 import { removeData } from "../helpers/storage_init";
 import { getData } from "../helpers/storage_init";
+// import { Picker } from "react-native-web";
 
 const options = [
   "GVSU HOME",
@@ -34,6 +37,9 @@ const HomeScreen = ({ route, navigation }) => {
       setPostsData(posts);
     });
   }, []);
+  const icon = () => {
+    return <EvilIcons name="user" size={40} color="blue" />;
+  };
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <></>,
@@ -55,6 +61,7 @@ const HomeScreen = ({ route, navigation }) => {
                 alignContent={"center"}
               />
             }
+            // rowStyle={"View"}
             dropdownIconPosition={"left"}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
@@ -72,7 +79,7 @@ const HomeScreen = ({ route, navigation }) => {
               }
             }}
             buttonTextAfterSelection={() => {
-              return <EvilIcons name="user" size={24} color="black" />;
+              return <EvilIcons name="user" size={40} color="blue" />;
             }}
             rowTextForSelection={(item, index) => {
               return item;

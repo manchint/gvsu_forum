@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  ImageBackground,
-  StyleSheet,
-  View,
-} from "react-native";
+import { ImageBackground, StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 
 //helper function
 import { saveData, getData } from "../helpers/storage_init";
-
 
 const image = {
   uri: "https://app.streamlineathletes.com/assets/programs/108/grand-valley-state-university_hero.jpg",
@@ -106,6 +101,16 @@ const Login = ({ route, navigation }) => {
             title={"LOGIN"}
             onPress={validateAndLogin}
           ></Button>
+          <Text style={{ fontWeight: "bold", marginTop: 10 }}>
+            Not a member Yet?
+            <Text
+              style={{ color: "blue" }}
+              onPress={() => navigation.navigate("Sign up")}
+            >
+              click here
+            </Text>{" "}
+            signup
+          </Text>
         </View>
       </ImageBackground>
     </View>

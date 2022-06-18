@@ -67,5 +67,5 @@ export const saveData = (response) => {
 };
 
 export const removeData = () => {
-  storage.removeItem({ key: "loginState" });
+  storage.remove({ key: "loginState" });
 };

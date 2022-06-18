@@ -7,31 +7,30 @@ import {
   set,
   getInputVal,
 } from "firebase/database";
-import storage from 'firebase/storage';
+import storage from "firebase/storage";
 export function addPost(item) {
-  const filename = item.image.substring(item.image.lastIndexOf('/') + 1);
-  const uploadUri = item.image;
-  const task = storage()
-    .ref(filename)
-    .putFile(uploadUri);
-  // set progress state
-  task.on('state_changed', snapshot => {
-    setTransferred(
-      Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000
-    );
-  });
-  try {
-    task;
-  } catch (e) {
-    console.error(e);
-  }
-  task.then(() => {
-    console.log('Image uploaded to the bucket!');
-    const db = getDatabase();
-    const reference = ref(db, "posts/");
-    push(reference, item);
-  });
-  
+  // const filename = item.image.substring(item.image.lastIndexOf('/') + 1);
+  // const uploadUri = item.image;
+  // const task = storage()
+  //   .ref(filename)
+  //   .putFile(uploadUri);
+  // // set progress state
+  // task.on('state_changed', snapshot => {
+  //   setTransferred(
+  //     Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000
+  //   );
+  // });
+  // try {
+  //   task;
+  // } catch (e) {
+  //   console.error(e);
+  // }
+  // task.then(() => {
+  console.log("Image uploaded to the bucket!");
+  const db = getDatabase();
+  const reference = ref(db, "posts/");
+  push(reference, item);
+  // });
 }
 
 export function setupPostsDataListener(updateFunc) {
@@ -62,13 +61,11 @@ export function updatePost(item) {
   set(reference, item);
 }
 
-
-
 export function stopPostsDataListener() {
   const db = getDatabase();
-  let unsubscribe = ref(db, "posts/")
-    
-    .onSnapshot((snapshot) => console.log("stopPostsDataListener fires up with: ", snapshot))
+  let unsubscribe = ref(db, "posts/").onSnapshot((snapshot) =>
+    console.log("stopPostsDataListener fires up with: ", snapshot)
+  );
   unsubscribe();
   // const reference = ref(db, "posts/");
   // push(reference, item);
