@@ -11,16 +11,14 @@ import { setupPostsDataListener } from "../helpers/forum_posts";
 
 import SelectDropdown from "react-native-select-dropdown";
 
-import { removeData } from "../helpers/storage_init";
-import { getData } from "../helpers/storage_init";
+import { getData,removeData } from "../helpers/storage_init";
 
 const HomeScreen = ({ route, navigation }) => {
   const [loginData, setLoginData] = useState();
   getData(setLoginData);
   const [postData, setPostsData] = useState([]);
   const options = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF"];
-  console.log("Button", loginData?.email);
-  // options.push(loginData?.email ? "LOGOUT" : "LOGIN");
+  if(loginData?.email) options.push("LOGOUT");
   useEffect(() => {
     try {
       initGvsuForumDB();
@@ -71,7 +69,10 @@ const HomeScreen = ({ route, navigation }) => {
                 Linking.openURL("https://www.gvsu.edu/banner/");
               else if (selectedItem === "FACULTY STAFF")
                 Linking.openURL("https://www.gvsu.edu/facultystaff.htm");
-              else if (selectedItem === "LOGOUT") navigation.navigate("Login");
+              else if (selectedItem === "LOGOUT") {
+                navigation.navigate("Login");
+                removeData();
+              }
               // else if (selectedItem === "LOGOUT") {
               //   removeData();
               //   navigation.navigate("Login");
@@ -91,8 +92,10 @@ const HomeScreen = ({ route, navigation }) => {
               return item;
             }}
           />
-          <Text
-            onPress={() => {if (!loginData?.email) navigation.navigate("Login")}}>{loginData?.email ? loginData.firstname : "LOGIN"}</Text>
+          {loginData?.email ? 
+            <Text>{loginData.firstname}</Text> : 
+            <Button title={'LOGIN'} onPress={() => {navigation.navigate("Login")}}></Button>
+          }
         </View>
       ),
     });

@@ -38,6 +38,9 @@ const Signup = ({ route, navigation }) => {
   });
 
   useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <></>,
+    })
     try {
       initGvsuForumDB();
     } catch (err) {

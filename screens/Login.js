@@ -28,6 +28,9 @@ const Login = ({ route, navigation }) => {
   });
   const [usersData, setUsersData] = useState([]);
   useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <></>,
+    })
     getData(setLoginData);
     try {
       initGvsuForumDB();
