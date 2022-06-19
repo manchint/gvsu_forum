@@ -17,7 +17,7 @@ const HomeScreen = ({ route, navigation }) => {
   const [loginData, setLoginData] = useState();
   getData(setLoginData);
   const [postData, setPostsData] = useState([]);
-  const options = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF"];
+  const options = ["GVSU HOME", "BLACK BOARD", "BANNER", "FACULTY STAFF", "GET WEATHER"];
   if (loginData?.email) options.push("LOGOUT");
   useEffect(() => {
     try {
@@ -72,6 +72,9 @@ const HomeScreen = ({ route, navigation }) => {
               else if (selectedItem === "LOGOUT") {
                 navigation.navigate("Login");
                 removeData();
+              }
+              else if (selectedItem === "GET WEATHER") {
+                navigation.navigate("Weather");
               }
               // else if (selectedItem === "LOGOUT") {
               //   removeData();

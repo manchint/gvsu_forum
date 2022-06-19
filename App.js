@@ -9,6 +9,7 @@ import HomeScreen from "./screens/HomeScreen";
 import Signup from "./screens/Signup";
 import Login from "./screens/Login";
 import CommentsScreen from "./screens/CommentsScreen";
+import WeatherScreen from './screens/WeatherScreen'
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Comments" component={CommentsScreen} />
+        <Stack.Screen name="Weather" component={WeatherScreen} />
         {/* <Stack.Screen
           name="GVSU Home"
           component={() =>
