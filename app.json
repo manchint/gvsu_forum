@@ -14,20 +14,36 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "edu.gvsu.forum",
+      "buildNumber": "1.0.0",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
+      "package": "edu.gvsu.forum",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyB9jHrn_3vLNAJ9wq6zbGZblmlS7CSWSZg",
+          "authDomain": "gvsuforum-baa4f.firebaseapp.com",
+          "databaseURL": "https://gvsuforum-baa4f-default-rtdb.firebaseio.com",
+          "projectId": "gvsuforum-baa4f",
+          "storageBucket": "gvsuforum-baa4f.appspot.com",
+          "messagingSenderId": "317521063061",
+          "appId": "1:317521063061:web:47b80322e453e8a2bb7f9c",
+          "measurementId": "G-M8ZB1NERR9"
+        }
+      }
     }
   }
 }

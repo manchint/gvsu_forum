@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "317521063061",
+    "firebase_url": "https://gvsuforum-baa4f-default-rtdb.firebaseio.com",
+    "project_id": "gvsuforum-baa4f",
+    "storage_bucket": "gvsuforum-baa4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317521063061:android:d84b37e5bdc4711cbb7f9c",
+        "android_client_info": {
+          "package_name": "edu.gvsu.forum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317521063061-vufa55i5f6iau6suf5n5qi0ge2h3ghoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByu1zUv7m6x0_aXF7Qt2zjByze_1QW1C0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317521063061-vufa55i5f6iau6suf5n5qi0ge2h3ghoj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "317521063061-revp04i35v03du0iu2ltafpdj3rh1cv2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "edu.gvsu.forum"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

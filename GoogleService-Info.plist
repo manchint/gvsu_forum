@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>317521063061-revp04i35v03du0iu2ltafpdj3rh1cv2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.317521063061-revp04i35v03du0iu2ltafpdj3rh1cv2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA4qwuhqYnBENhiEJpLW_F6ZwRxz3GPF-4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>317521063061</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.gvsu.forum</string>
+	<key>PROJECT_ID</key>
+	<string>gvsuforum-baa4f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gvsuforum-baa4f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:317521063061:ios:3c2091b715d66ee1bb7f9c</string>
+	<key>DATABASE_URL</key>
+	<string>https://gvsuforum-baa4f-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

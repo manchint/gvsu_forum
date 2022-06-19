@@ -9,15 +9,37 @@ import HomeScreen from "./screens/HomeScreen";
 import Signup from "./screens/Signup";
 import Login from "./screens/Login";
 import CommentsScreen from "./screens/CommentsScreen";
-import WeatherScreen from './screens/WeatherScreen'
+import WeatherScreen from "./screens/WeatherScreen";
+import * as Analytics from "expo-firebase-analytics";
+
+import React, { useRef } from "react";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+  const navigationRef = useRef();
+  const routeNameRef = useRef();
   // storage();
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() =>
+        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+      }
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+        if (previousRouteName !== currentRouteName) {
+          await Analytics.logEvent("screen_view", {
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
+        }
+        // Save the current route name for later comparison
+        routeNameRef.current = currentRouteName;
+      }}
+    >
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Sign up" component={Signup} />
         <Stack.Screen name="Login" component={Login} />
