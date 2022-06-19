@@ -186,6 +186,16 @@ const Signup = ({ route, navigation }) => {
             onPress={() => validateUserData()}
             title={"SIGNUP"}
           ></Button>
+          <Text style={{ fontWeight: "bold", marginTop: 10, color:'white' }}>
+            Have already account?
+            <Text
+              style={{ color: "red" }}
+              onPress={() => navigation.navigate("Login")}
+            >
+              click here 
+            </Text>{" "}
+            to login
+          </Text>
         </View>
       </ImageBackground>
     </View>

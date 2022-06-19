@@ -11,7 +11,7 @@ const getBase64StringFromDataURL = (dataURL) => {
 };
 export const addPost = async (item) => {
   const db = getDatabase();
-  item.image = getBase64StringFromDataURL(item.image);
+  //item.image = getBase64StringFromDataURL(item.image);
   // item.image = base64.encode(item.image);
   const reference = ref(db, "posts/");
   push(reference, item);

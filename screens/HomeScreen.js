@@ -29,7 +29,6 @@ const HomeScreen = ({ route, navigation }) => {
       setPostsData(posts);
     });
   }, []);
-
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <></>,
@@ -47,6 +46,7 @@ const HomeScreen = ({ route, navigation }) => {
         >
           <SelectDropdown
             data={options}
+            dropdownStyle={{backgroundColor:'#fff'}}
             defaultButtonText={
               <EvilIcons
                 name="user"
